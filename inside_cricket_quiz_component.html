@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inside Cricket - Interactive Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        tealbrand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            900: '#134e4a',
+                            glow: 'rgba(45, 212, 191, 0.25)',
+                        },
+                        darkbg: {
+                            base: '#0B0F17',
+                            card: '#151D2A',
+                            hover: '#1E293B',
+                            border: '#2A364F'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0B0F17;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(13, 148, 136, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(20, 184, 166, 0.08) 0px, transparent 50%);
+        }
+
+        .glass-panel {
+            background: rgba(21, 29, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid #2A364F;
+        }
+        
+        .glow-teal {
+            box-shadow: 0 0 25px -2px rgba(45, 212, 191, 0.3);
+            border-color: #2dd4bf !important;
+        }
+        
+        .glow-red {
+            box-shadow: 0 0 25px -2px rgba(239, 68, 68, 0.3);
+            border-color: #ef4444 !important;
+        }
+
+        .option-btn {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: rgba(21, 29, 42, 0.9);
+            border-color: #2A364F;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            border-color: #2dd4bf;
+            background-color: #1E293B;
+            box-shadow: 0 4px 15px -3px rgba(13, 148, 136, 0.2);
+        }
+
+        .option-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        @keyframes subtle-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.02); }
+        }
+
+        .timer-warning {
+            animation: subtle-pulse 1s infinite;
+            color: #f87171 !important;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F17;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A364F;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="bg-darkbg-base text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-tealbrand-500 selection:text-black">
+
+    <header class="border-b border-darkbg-border bg-darkbg-base/90 sticky top-0 z-40 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-tealbrand-600 to-tealbrand-400 flex items-center justify-center text-slate-950 font-black text-lg shadow-lg shadow-tealbrand-600/30 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-cricket-bat-ball text-sm"></i>
+                </div>
+                <span class="font-display font-bold text-xl tracking-tight text-white group-hover:text-tealbrand-400 transition-colors">
+                    INSIDE <span class="text-tealbrand-400">CRICKET</span>
+                </span>
+            </a>
+            
+            <div class="flex items-center gap-4">
+                <button id="soundToggleBtn" aria-label="Toggle Sound" class="p-2.5 rounded-lg bg-darkbg-card text-slate-400 hover:text-white hover:bg-darkbg-hover transition-colors border border-darkbg-border">
+                    <i class="fa-solid fa-volume-high text-sm"></i>
+                </button>
+                <div class="hidden sm:flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-tealbrand-400 bg-tealbrand-900/40 px-3 py-1.5 rounded-full border border-tealbrand-600/40">
+                    <span class="w-2 h-2 rounded-full bg-tealbrand-400 animate-pulse"></span>
+                    50+ Question Bank
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 sm:py-12 flex-1 flex flex-col justify-center w-full">
+        <div class="relative">
+            <div class="absolute -top-12 -left-12 w-64 h-64 bg-tealbrand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-12 -right-12 w-64 h-64 bg-tealbrand-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- START SCREEN -->
+            <div id="startScreen" class="glass-panel rounded-3xl p-6 sm:p-10 text-center relative z-10">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-tealbrand-500/10 text-tealbrand-400 mb-6 border border-tealbrand-500/20 shadow-lg shadow-tealbrand-500/10">
+                    <i class="fa-solid fa-trophy text-2xl"></i>
+                </div>
+                <h1 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+                    Test Your Cricket IQ
+                </h1>
+                <p class="text-slate-400 max-w-lg mx-auto text-base sm:text-lg mb-8 leading-relaxed">
+                    Challenge yourself with <span class="text-tealbrand-400 font-semibold">50+ unique questions</span> across World Cup history, official laws, legendary records, pitch dynamics, and grounds!
+                </p>
+
+                <!-- Category Pills -->
+                <div class="flex flex-wrap items-center justify-center gap-2 mb-8 max-w-lg mx-auto">
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-darkbg-hover text-tealbrand-400 border border-darkbg-border">🏆 World Cup History</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-darkbg-hover text-tealbrand-400 border border-darkbg-border">⚖️ Official Laws</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-darkbg-hover text-tealbrand-400 border border-darkbg-border">⭐ Records & Stats</span>
+                    <span class="px-3 py-1 rounded-full text-xs font-medium bg-darkbg-hover text-tealbrand-400 border border-darkbg-border">🏟️ Iconic Grounds</span>
+                </div>
+
+                <!-- Quiz Mode Config -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 text-left max-w-2xl mx-auto">
+                    <div class="p-4 rounded-xl bg-darkbg-card border border-darkbg-border flex items-center gap-3">
+                        <i class="fa-solid fa-arrows-rotate text-tealbrand-400 text-lg"></i>
+                        <div>
+                            <div class="text-xs text-slate-400">Question Pool</div>
+                            <div id="poolStatus" class="text-sm font-bold text-white">50 Questions (5 Rounds)</div>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-darkbg-card border border-darkbg-border flex items-center gap-3">
+                        <i class="fa-solid fa-stopwatch text-tealbrand-400 text-lg"></i>
+                        <div>
+                            <div class="text-xs text-slate-400">Per Question</div>
+                            <div class="text-sm font-bold text-white">20 Seconds</div>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-darkbg-card border border-darkbg-border flex items-center gap-3">
+                        <i class="fa-solid fa-award text-tealbrand-400 text-lg"></i>
+                        <div>
+                            <div class="text-xs text-slate-400">Current Round</div>
+                            <div id="roundBadge" class="text-sm font-bold text-white">Round 1 of 5</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="startBtn" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-tealbrand-500 to-tealbrand-600 hover:from-tealbrand-400 hover:to-tealbrand-500 text-slate-950 font-bold text-lg rounded-xl shadow-lg shadow-tealbrand-500/25 transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3 mx-auto">
+                    <span>Start Round 1</span>
+                    <i class="fa-solid fa-arrow-right text-sm"></i>
+                </button>
+            </div>
+
+            <!-- QUESTION SCREEN -->
+            <div id="quizScreen" class="glass-panel rounded-3xl p-6 sm:p-8 relative z-10 hidden">
+                <div class="mb-6">
+                    <div class="flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-400 mb-3">
+                        <span id="questionCounter" class="text-tealbrand-400 uppercase tracking-wider font-display font-bold">
+                            Question 1 of 10
+                        </span>
+                        <div class="flex items-center gap-2 bg-darkbg-card px-3 py-1 rounded-full border border-darkbg-border">
+                            <i class="fa-regular fa-clock text-tealbrand-400"></i>
+                            <span id="timerText" class="font-mono text-white text-sm">20s</span>
+                        </div>
+                    </div>
+
+                    <div class="w-full h-2 bg-darkbg-card rounded-full overflow-hidden border border-darkbg-border">
+                        <div id="progressBar" class="h-full bg-gradient-to-r from-tealbrand-600 to-tealbrand-400 w-0 transition-all duration-300 ease-out"></div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <span id="categoryTag" class="inline-block text-[11px] font-bold uppercase tracking-widest text-tealbrand-400 bg-tealbrand-900/30 px-2.5 py-1 rounded-md mb-3 border border-tealbrand-600/30">
+                        World Cup History
+                    </span>
+                    <h2 id="questionText" class="text-xl sm:text-2xl font-bold text-white leading-snug">
+                        Loading question...
+                    </h2>
+                </div>
+
+                <div id="optionsContainer" class="grid grid-cols-1 gap-3 sm:gap-4 mb-8">
+                    <!-- Options populated via JS -->
+                </div>
+
+                <div id="explanationBox" class="p-4 rounded-xl bg-darkbg-card border border-darkbg-border mb-6 hidden">
+                    <div class="flex items-start gap-3">
+                        <div id="explanationIcon" class="mt-0.5 font-bold text-lg"></div>
+                        <div class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            <span id="explanationStatus" class="font-bold block text-sm mb-1"></span>
+                            <span id="explanationText"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between border-t border-darkbg-border pt-5">
+                    <div class="text-xs text-slate-400 font-medium">
+                        Score: <span id="currentScore" class="text-tealbrand-400 font-bold text-sm">0</span>
+                    </div>
+                    <button id="nextBtn" disabled class="px-6 py-2.5 rounded-xl bg-tealbrand-500 text-slate-950 font-bold text-sm hover:bg-tealbrand-400 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2 shadow-md shadow-tealbrand-500/20">
+                        <span>Next Question</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- RESULTS SCREEN -->
+            <div id="resultsScreen" class="glass-panel rounded-3xl p-6 sm:p-10 text-center relative z-10 hidden">
+                <div class="relative inline-block mb-6">
+                    <div id="scoreRingBg" class="w-28 h-28 sm:w-36 sm:h-36 rounded-full border-4 border-darkbg-border flex items-center justify-center mx-auto bg-darkbg-card">
+                        <div>
+                            <span id="finalScorePercent" class="font-display text-3xl sm:text-4xl font-extrabold text-white block">0%</span>
+                            <span id="finalScoreFraction" class="text-xs text-slate-400 font-medium">0 of 10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Title & Badge -->
+                <div class="mb-2 flex items-center justify-center gap-2">
+                    <span id="badgeIcon" class="text-xl">🏆</span>
+                    <span id="badgeText" class="text-xs uppercase font-bold tracking-widest text-tealbrand-400 bg-tealbrand-900/40 px-3 py-1 rounded-full border border-tealbrand-600/30">Master Tactician</span>
+                </div>
+                
+                <h2 id="resultTitle" class="font-display text-2xl sm:text-3xl font-bold text-white mb-2">
+                    Round Completed!
+                </h2>
+                <p id="resultMessage" class="text-slate-400 text-sm sm:text-base max-w-md mx-auto mb-8">
+                    Evaluating your performance...
+                </p>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8 text-left max-w-xl mx-auto">
+                    <div class="p-3.5 rounded-xl bg-darkbg-card border border-darkbg-border">
+                        <div class="text-[11px] text-slate-400 uppercase font-semibold">Total Questions</div>
+                        <div id="statTotal" class="text-lg font-bold text-white mt-1">10</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-darkbg-card border border-darkbg-border">
+                        <div class="text-[11px] text-tealbrand-400 uppercase font-semibold">Correct</div>
+                        <div id="statCorrect" class="text-lg font-bold text-tealbrand-400 mt-1">0</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-darkbg-card border border-darkbg-border">
+                        <div class="text-[11px] text-rose-400 uppercase font-semibold">Incorrect</div>
+                        <div id="statIncorrect" class="text-lg font-bold text-rose-400 mt-1">0</div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-darkbg-card border border-darkbg-border">
+                        <div class="text-[11px] text-amber-400 uppercase font-semibold">Avg. Speed</div>
+                        <div id="statSpeed" class="text-lg font-bold text-amber-400 mt-1">0s</div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <button id="restartBtn" class="w-full sm:w-auto px-6 py-3 bg-tealbrand-500 hover:bg-tealbrand-400 text-slate-950 font-bold rounded-xl transition-all shadow-lg shadow-tealbrand-500/20 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-rotate-right text-sm"></i>
+                        <span id="restartBtnText">Play Next Unplayed Round</span>
+                    </button>
+                    <button id="shareBtn" class="w-full sm:w-auto px-6 py-3 bg-darkbg-card hover:bg-darkbg-hover text-white font-bold rounded-xl border border-darkbg-border transition-all flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-copy text-sm text-tealbrand-400"></i>
+                        <span>Copy Summary</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-darkbg-border py-6 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p>© Inside Cricket — Designed for Cricket Enthusiasts Worldwide.</p>
+            <div class="flex gap-4 text-slate-400">
+                <span class="hover:text-tealbrand-400 transition-colors cursor-pointer">Rules</span>
+                <span class="hover:text-tealbrand-400 transition-colors cursor-pointer">History</span>
+                <span class="hover:text-tealbrand-400 transition-colors cursor-pointer">Records</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* 50 UNIQUE CRICKET QUESTIONS (Guarantees 5 complete unique playthroughs of 10 questions each) */
+        const quizQuestionsPool = [
+            // --- ROUND 1 / BATCH 1 ---
+            {
+                category: "World Cup History",
+                question: "Which team won the inaugural ICC Men's Cricket World Cup in 1975?",
+                options: ["Australia", "West Indies", "England", "India"],
+                correct: 1,
+                explanation: "West Indies defeated Australia by 17 runs in a memorable final at Lord's to win the first-ever World Cup in 1975."
+            },
+            {
+                category: "Official Laws",
+                question: "According to standard cricket laws, what is the exact length of a pitch between wickets?",
+                options: ["20 yards", "22 yards", "24 yards", "25 yards"],
+                correct: 1,
+                explanation: "Law 6 specifies that the pitch is a rectangular area of the ground 22 yards (20.12 m) long and 10 ft (3.05 m) wide."
+            },
+            {
+                category: "Iconic Records",
+                question: "Who holds the record for the highest individual score in a single One Day International (ODI) match?",
+                options: ["Sachin Tendulkar", "Martin Guptill", "Rohit Sharma", "Virender Sehwag"],
+                correct: 2,
+                explanation: "Rohit Sharma smashed 264 runs off 173 balls against Sri Lanka at Eden Gardens in November 2014."
+            },
+            {
+                category: "World Cup History",
+                question: "In which year did India win its first ICC Men's ODI World Cup title under Kapil Dev?",
+                options: ["1979", "1983", "1987", "1992"],
+                correct: 1,
+                explanation: "India famously defended 183 runs against the two-time defending champion West Indies at Lord's in 1983."
+            },
+            {
+                category: "Official Laws",
+                question: "What happens if a bowler steps over the crease line with their front foot during a delivery in limited overs cricket?",
+                options: ["Dead ball", "No Ball + Free Hit", "Wide Ball", "1 Run Penalty only"],
+                correct: 1,
+                explanation: "A front-foot crease infraction results in a No Ball, 1 run penalty, and a mandatory Free Hit for the next delivery."
+            },
+            {
+                category: "Iconic Records",
+                question: "Which legendary bowler has taken the highest number of wickets in Test cricket history?",
+                options: ["Shane Warne", "James Anderson", "Muttiah Muralitharan", "Anil Kumble"],
+                correct: 2,
+                explanation: "Sri Lankan legend Muttiah Muralitharan bagged an unprecedented 800 wickets across 133 Test matches."
+            },
+            {
+                category: "World Cup History",
+                question: "Which country has won the ICC Men's ODI World Cup the most number of times?",
+                options: ["West Indies", "India", "England", "Australia"],
+                correct: 3,
+                explanation: "Australia has dominated the tournament history with 6 World Cup titles (1987, 1999, 2003, 2007, 2015, and 2023)."
+            },
+            {
+                category: "Terminology & Rules",
+                question: "What is the term used when a batsman is dismissed for zero runs on the very first ball they face?",
+                options: ["Golden Duck", "Silver Duck", "Diamond Duck", "Pair"],
+                correct: 0,
+                explanation: "Dismissal on the first ball faced is a 'Golden Duck'. Dismissal without facing a legal ball is a 'Diamond Duck'."
+            },
+            {
+                category: "Format Specifics",
+                question: "In a standard 20-over T20 International match, how many overs can an individual bowler maximum bowl?",
+                options: ["3 Overs", "4 Overs", "5 Overs", "6 Overs"],
+                correct: 1,
+                explanation: "In T20 matches, no bowler may bowl more than one-fifth (4 overs) of the total overs per innings."
+            },
+            {
+                category: "Historical Milestones",
+                question: "Who was the first batsman in international cricket history to score 100 international centuries?",
+                options: ["Ricky Ponting", "Sachin Tendulkar", "Virat Kohli", "Jacques Kallis"],
+                correct: 1,
+                explanation: "Sachin Tendulkar reached this monumental milestone in March 2012 against Bangladesh (51 Test & 49 ODI hundreds)."
+            },
+
+            // --- ROUND 2 / BATCH 2 ---
+            {
+                category: "World Cup History",
+                question: "Who was awarded Man of the Tournament in the 2011 ICC Men's Cricket World Cup?",
+                options: ["Yuvraj Singh", "Sachin Tendulkar", "Kumar Sangakkara", "MS Dhoni"],
+                correct: 0,
+                explanation: "Yuvraj Singh won Man of the Tournament for his brilliant all-round contribution of 362 runs and 15 wickets."
+            },
+            {
+                category: "Official Laws",
+                question: "How many fielders are allowed outside the 30-yard circle during the first 10 overs (Powerplay 1) of an ODI?",
+                options: ["Maximum 2", "Maximum 3", "Maximum 4", "Maximum 5"],
+                correct: 0,
+                explanation: "In mandatory Powerplay 1 (overs 1-10), a maximum of 2 fielders are permitted outside the 30-yard inner circle."
+            },
+            {
+                category: "Iconic Records",
+                question: "Who holds the record for the fastest century in One Day International (ODI) cricket history?",
+                options: ["Shahid Afridi", "AB de Villiers", "Corey Anderson", "Chris Gayle"],
+                correct: 1,
+                explanation: "AB de Villiers scored a 31-ball century against the West Indies at Johannesburg in January 2015."
+            },
+            {
+                category: "Iconic Grounds",
+                question: "Which iconic cricket venue is universally referred to as the 'Mecca of Cricket'?",
+                options: ["The MCG", "Eden Gardens", "Lord's", "The Oval"],
+                correct: 2,
+                explanation: "Lord's Cricket Ground in London, established in 1814, is widely known as the Mecca of Cricket."
+            },
+            {
+                category: "Terminology & Rules",
+                question: "What does the abbreviation 'LBW' stand for in cricket?",
+                options: ["Leg Before Wicket", "Line Beyond Wicket", "Leg Behind Width", "Late Bat Warning"],
+                correct: 0,
+                explanation: "LBW stands for 'Leg Before Wicket', one of the standard ways a batter can be dismissed."
+            },
+            {
+                category: "World Cup History",
+                question: "Which team scored the highest total in an ICC Men's ODI World Cup match (428/5 against Sri Lanka in 2023)?",
+                options: ["Australia", "South Africa", "England", "India"],
+                correct: 1,
+                explanation: "South Africa posted 428/5 against Sri Lanka in Delhi during the 2023 World Cup."
+            },
+            {
+                category: "Iconic Records",
+                question: "Who was the first cricketer to hit 6 sixes in an over in T20 International cricket?",
+                options: ["Herschelle Gibbs", "Yuvraj Singh", "Kieron Pollard", "Rinku Singh"],
+                correct: 1,
+                explanation: "Yuvraj Singh hit Stuart Broad for 6 sixes in an over during the 2007 ICC T20 World Cup in Durban."
+            },
+            {
+                category: "Format Specifics",
+                question: "What color ball is traditionally used in day-night Test matches?",
+                options: ["Red", "White", "Pink", "Orange"],
+                correct: 2,
+                explanation: "Pink balls are used for day-night Test matches for optimal visibility under stadium floodlights."
+            },
+            {
+                category: "Official Laws",
+                question: "If the ball hits a fielder's helmet resting on the ground behind the wicketkeeper, how many penalty runs are awarded?",
+                options: ["3 Runs", "4 Runs", "5 Runs", "6 Runs"],
+                correct: 2,
+                explanation: "Under Law 28.3, if the ball in play touches a helmet placed on the field, 5 penalty runs are awarded to the batting team."
+            },
+            {
+                category: "Historical Milestones",
+                question: "Which country hosted the first official international cricket match ever played in 1844?",
+                options: ["England vs Australia", "USA vs Canada", "England vs West Indies", "Australia vs New Zealand"],
+                correct: 1,
+                explanation: "The first international cricket match was played between the USA and Canada in September 1844 in New York."
+            },
+
+            // --- ROUND 3 / BATCH 3 ---
+            {
+                category: "World Cup History",
+                question: "Who captained Pakistan when they won their first and only ICC Men's ODI World Cup title in 1992?",
+                options: ["Wasim Akram", "Javed Miandad", "Imran Khan", "Inzamam-ul-Haq"],
+                correct: 2,
+                explanation: "Imran Khan led Pakistan to World Cup glory in 1992, defeating England in the final at the Melbourne Cricket Ground."
+            },
+            {
+                category: "Iconic Records",
+                question: "Who holds the record for the highest individual score in a single Test innings (400 not out)?",
+                options: ["Matthew Hayden", "Brian Lara", "Virender Sehwag", "Don Bradman"],
+                correct: 1,
+                explanation: "West Indian legend Brian Lara scored 400* against England at Antigua in April 2004."
+            },
+            {
+                category: "Official Laws",
+                question: "How long is a lunch interval during a standard 5-day Test match?",
+                options: ["30 Minutes", "40 Minutes", "45 Minutes", "60 Minutes"],
+                correct: 1,
+                explanation: "A standard lunch interval in Test cricket lasts for 40 minutes between session 1 and session 2."
+            },
+            {
+                category: "Terminology & Rules",
+                question: "What is a 'Chinaman' bowler in cricket terminology?",
+                options: ["Right-arm fast bowler", "Left-arm wrist spinner", "Left-arm finger spinner", "Underarm bowler"],
+                correct: 1,
+                explanation: "A 'Chinaman' or left-arm wrist spinner turns the ball into a right-handed batter using wrist spin."
+            },
+            {
+                category: "World Cup History",
+                question: "Which nation won the inaugural ICC T20 Men's World Cup held in South Africa in 2007?",
+                options: ["Pakistan", "India", "Australia", "Sri Lanka"],
+                correct: 1,
+                explanation: "India defeated Pakistan by 5 runs in a thrilling final at Johannesburg to claim the 2007 T20 World Cup."
+            },
+            {
+                category: "Iconic Records",
+                question: "Which batter has the highest Test batting average in history (minimum 20 innings)?",
+                options: ["Steve Smith", "Sachin Tendulkar", "Sir Donald Bradman", "Ken Barrington"],
+                correct: 2,
+                explanation: "Sir Donald Bradman holds an unassailable career Test average of 99.94 across 52 Test matches."
+            },
+            {
+                category: "Iconic Grounds",
+                question: "Which is the world's largest cricket stadium by seating capacity?",
+                options: ["Melbourne Cricket Ground (MCG)", "Eden Gardens", "Narendra Modi Stadium", "Perth Stadium"],
+                correct: 2,
+                explanation: "The Narendra Modi Stadium in Ahmedabad, India, holds the top position with a capacity of 132,000 spectators."
+            },
+            {
+                category: "Format Specifics",
+                question: "What happens if a T20 knockout match ends in a tie after both 20 overs are completed?",
+                options: ["Bowl-out", "Super Over", "Boundary Count", "Replay next day"],
+                correct: 1,
+                explanation: "Tied limited-overs knockout matches are decided using a single 'Super Over' to determine the winner."
+            },
+            {
+                category: "Official Laws",
+                question: "Can a batter be given out 'Timed Out' if they take too long to arrive at the crease?",
+                options: ["No, it's just a warning", "Yes, within 2-3 minutes", "Only in Test cricket", "Only if the bowler appeals"],
+                correct: 1,
+                explanation: "Under ICC playing conditions, an incoming batter must be ready to face within 2 minutes, or risk being Timed Out."
+            },
+            {
+                category: "Historical Milestones",
+                question: "Who was the first bowler to reach 500 Test wickets in international cricket?",
+                options: ["Muttiah Muralitharan", "Shane Warne", "Courtney Walsh", "Glenn McGrath"],
+                correct: 2,
+                explanation: "West Indies fast bowler Courtney Walsh was the first bowler in history to cross the 500 Test wicket milestone in 2001."
+            },
+
+            // --- ROUND 4 / BATCH 4 ---
+            {
+                category: "World Cup History",
+                question: "Which team won the 1996 ICC Men's Cricket World Cup hosted in the Indian subcontinent?",
+                options: ["Australia", "India", "Sri Lanka", "Pakistan"],
+                correct: 2,
+                explanation: "Sri Lanka won their maiden World Cup title in 1996 under the captaincy of Arjuna Ranatunga by beating Australia."
+            },
+            {
+                category: "Official Laws",
+                question: "How many fielders are allowed on the leg side (behind square) at any given time in cricket?",
+                options: ["Maximum 2", "Maximum 3", "Maximum 4", "No limit"],
+                correct: 0,
+                explanation: "Law 28.4 states that no more than 2 fielders may be positioned in the leg-side quadrant behind square leg."
+            },
+            {
+                category: "Iconic Records",
+                question: "Who scored the fastest century in Test cricket history (off just 54 balls)?",
+                options: ["Viv Richards", "Brendon McCullum", "Adam Gilchrist", "Misbah-ul-Haq"],
+                correct: 1,
+                explanation: "Brendon McCullum scored a 54-ball hundred against Australia in Christchurch in his final Test match in 2016."
+            },
+            {
+                category: "Terminology & Rules",
+                question: "What is a 'Mankad' dismissal in cricket?",
+                options: ["Hitting ball twice", "Running out non-striker backing up before delivery", "Obstruction of field", "Handling ball"],
+                correct: 1,
+                explanation: "It refers to running out the non-striker who leaves their crease early before the bowler releases the ball."
+            },
+            {
+                category: "World Cup History",
+                question: "Which country won three consecutive ICC Men's ODI World Cup titles from 1999 to 2007?",
+                options: ["West Indies", "India", "South Africa", "Australia"],
+                correct: 3,
+                explanation: "Australia pulled off an unprecedented hat-trick of World Cup titles in 1999 (Steve Waugh), 2003, and 2007 (Ricky Ponting)."
+            },
+            {
+                category: "Iconic Records",
+                question: "Who holds the record for the most double centuries (12) in Test cricket history?",
+                options: ["Kumar Sangakkara", "Sir Donald Bradman", "Brian Lara", "Virat Kohli"],
+                correct: 1,
+                explanation: "Sir Donald Bradman scored 12 double centuries during his legendary Test career."
+            },
+            {
+                category: "Official Laws",
+                question: "What is the maximum weight permitted for an official cricket ball?",
+                options: ["155.9 grams", "163 grams", "170 grams", "180 grams"],
+                correct: 1,
+                explanation: "According to Law 4, a men's cricket ball must weigh between 5.5 ounces (155.9g) and 5.75 ounces (163g)."
+            },
+            {
+                category: "Format Specifics",
+                question: "How many overs are bowled in a single day of a standard Test match without rain interruptions?",
+                options: ["80 overs", "85 overs", "90 overs", "100 overs"],
+                correct: 2,
+                explanation: "A standard day of Test match cricket consists of a minimum target of 90 overs scheduled across 3 sessions."
+            },
+            {
+                category: "Iconic Grounds",
+                question: "In which city is the famous 'Eden Gardens' cricket ground located?",
+                options: ["Mumbai", "Kolkata", "Chennai", "Bengaluru"],
+                correct: 1,
+                explanation: "Eden Gardens, one of the most historic cricket venues in Asia, is located in Kolkata, India."
+            },
+            {
+                category: "Historical Milestones",
+                question: "Who was the first bowler to take 500 wickets in ODI cricket history?",
+                options: ["Muttiah Muralitharan", "Wasim Akram", "Waqar Younis", "Chaminda Vaas"],
+                correct: 1,
+                explanation: "Pakistani swing bowler Wasim Akram was the first player in history to break the 500 ODI wicket barrier."
+            },
+
+            // --- ROUND 5 / BATCH 5 ---
+            {
+                category: "World Cup History",
+                question: "Who hit the winning boundary/runs for England in the dramatic 2019 ICC World Cup final Super Over?",
+                options: ["Ben Stokes", "Eoin Morgan", "Jos Buttler", "Jofra Archer"],
+                correct: 2,
+                explanation: "Jos Buttler ran out Martin Guptill on the final ball of the Super Over to seal England's maiden World Cup title."
+            },
+            {
+                category: "Official Laws",
+                question: "What happens if a batter hits the ball twice intentionally to protect their stumps without fielding permission?",
+                options: ["1 run penalty", "Given Out (Hit the ball twice)", "Dead ball", "No Ball"],
+                correct: 1,
+                explanation: "Under Law 34, a batter can be given out 'Hit the ball twice' if they strike it a second time for reasons other than guarding their wicket."
+            },
+            {
+                category: "Iconic Records",
+                question: "Who hit the fastest half-century (50 runs off 12 balls) in T20 International history?",
+                options: ["Yuvraj Singh", "Dipendra Singh Airee", "Chris Gayle", "AB de Villiers"],
+                correct: 1,
+                explanation: "Nepal's Dipendra Singh Airee smashed a 9-ball fifty against Mongolia in September 2023, breaking Yuvraj's record."
+            },
+            {
+                category: "Terminology & Rules",
+                question: "What is a 'Googly' delivered by a leg-spin bowler?",
+                options: ["A ball that turns away from right-hander", "A ball that turns into a right-hander", "A bouncer", "A beam ball"],
+                correct: 1,
+                explanation: "A googly is a leg-spinner's variation that unexpectedly turns in the opposite direction (into a right-handed batter)."
+            },
+            {
+                category: "World Cup History",
+                question: "Who won the ICC Men's T20 World Cup hosted in Australia in 2022?",
+                options: ["Pakistan", "England", "India", "New Zealand"],
+                correct: 1,
+                explanation: "England defeated Pakistan at the MCG to claim their second T20 World Cup title in November 2022."
+            },
+            {
+                category: "Iconic Records",
+                question: "Which wicketkeeper holds the record for the most dismissals in international cricket?",
+                options: ["Adam Gilchrist", "Kumar Sangakkara", "MS Dhoni", "Mark Boucher"],
+                correct: 3,
+                explanation: "South African Mark Boucher holds the overall record with 998 international dismissals (555 Tests, 424 ODIs, 19 T20Is)."
+            },
+            {
+                category: "Official Laws",
+                question: "Under the DLS (Duckworth-Lewis-Stern) method, what primary factor is calculated to reset targets?",
+                options: ["Pitch humidity", "Combined Team Resources (Overs & Wickets remaining)", "Boundaries hit", "Weather temperature"],
+                correct: 1,
+                explanation: "The DLS method calculates team resources based on a combination of overs remaining and wickets in hand."
+            },
+            {
+                category: "Format Specifics",
+                question: "How long is the break between innings in an international T20 match?",
+                options: ["10 Minutes", "20 Minutes", "15 Minutes", "30 Minutes"],
+                correct: 2,
+                explanation: "Standard innings interval in a T20 International match is 15 minutes."
+            },
+            {
+                category: "Iconic Grounds",
+                question: "Which Australian ground is famous for its Boxing Day Test match starting December 26 each year?",
+                options: ["Sydney Cricket Ground (SCG)", "The Gabba", "Melbourne Cricket Ground (MCG)", "Adelaide Oval"],
+                correct: 2,
+                explanation: "The Melbourne Cricket Ground (MCG) traditionally hosts Australia's marquee Boxing Day Test match."
+            },
+            {
+                category: "Historical Milestones",
+                question: "Who was the first batter to score a double century (200) in Men's One Day International (ODI) history?",
+                options: ["Rohit Sharma", "Sachin Tendulkar", "Virender Sehwag", "Chris Gayle"],
+                correct: 1,
+                explanation: "Sachin Tendulkar became the first male player to score an ODI double hundred (200*) against South Africa at Gwalior in Feb 2010."
+            }
+        ];
+
+        // APP STATE & PLAYTHROUGH TRACKING
+        const QUESTIONS_PER_ROUND = 10;
+        let playedIndices = []; // Stores indices of questions already answered across playthroughs
+        let currentRoundQuestions = [];
+        let currentQuestionIdx = 0;
+        let score = 0;
+        let timerInterval = null;
+        let timeLeft = 20;
+        let isSoundEnabled = true;
+        let questionStartTime = 0;
+        let timeSpentArray = [];
+
+        // DOM SELECTORS
+        const startScreen = document.getElementById('startScreen');
+        const quizScreen = document.getElementById('quizScreen');
+        const resultsScreen = document.getElementById('resultsScreen');
+
+        const startBtn = document.getElementById('startBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const shareBtn = document.getElementById('shareBtn');
+        const soundToggleBtn = document.getElementById('soundToggleBtn');
+
+        const questionCounter = document.getElementById('questionCounter');
+        const timerText = document.getElementById('timerText');
+        const progressBar = document.getElementById('progressBar');
+        const categoryTag = document.getElementById('categoryTag');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+
+        const explanationBox = document.getElementById('explanationBox');
+        const explanationIcon = document.getElementById('explanationIcon');
+        const explanationStatus = document.getElementById('explanationStatus');
+        const explanationText = document.getElementById('explanationText');
+        const currentScoreEl = document.getElementById('currentScore');
+        const roundBadge = document.getElementById('roundBadge');
+        const poolStatus = document.getElementById('poolStatus');
+
+        // WEB AUDIO SYNTHESIZER FOR SOUND EFFECTS
+        function playSound(type) {
+            if (!isSoundEnabled) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+                    osc.frequency.exponentialRampToValueAtTime(659.25, ctx.currentTime + 0.15); // E5
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.25);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(180, ctx.currentTime);
+                    osc.frequency.linearRampToValueAtTime(110, ctx.currentTime + 0.25);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                }
+            } catch (e) {
+                // Silently fallback if Web Audio is blocked
+            }
+        }
+
+        function initApp() {
+            startBtn.addEventListener('click', startQuizRound);
+            nextBtn.addEventListener('click', handleNextQuestion);
+            restartBtn.addEventListener('click', startQuizRound);
+            shareBtn.addEventListener('click', copyResultsToClipboard);
+
+            soundToggleBtn.addEventListener('click', () => {
+                isSoundEnabled = !isSoundEnabled;
+                soundToggleBtn.innerHTML = isSoundEnabled ? 
+                    '<i class="fa-solid fa-volume-high text-sm"></i>' : 
+                    '<i class="fa-solid fa-volume-xmark text-sm text-slate-500"></i>';
+            });
+
+            updatePoolUI();
+        }
+
+        // Updates start screen UI badges regarding remaining question pool
+        function updatePoolUI() {
+            const playedCount = playedIndices.length;
+            const remainingCount = quizQuestionsPool.length - playedCount;
+            const currentRoundNumber = Math.floor(playedCount / QUESTIONS_PER_ROUND) + 1;
+            const maxRounds = Math.floor(quizQuestionsPool.length / QUESTIONS_PER_ROUND);
+
+            if (remainingCount < QUESTIONS_PER_ROUND) {
+                // Pool exhausted -> wrap around & reset played tracker
+                playedIndices = [];
+                roundBadge.textContent = `Round 1 of ${maxRounds} (Reset)`;
+                poolStatus.textContent = `${quizQuestionsPool.length} Unplayed Fresh Pool`;
+                startBtn.querySelector('span').textContent = `Start Fresh Pool (Round 1)`;
+            } else {
+                roundBadge.textContent = `Round ${currentRoundNumber} of ${maxRounds}`;
+                poolStatus.textContent = `${remainingCount} Unplayed Questions Left`;
+                startBtn.querySelector('span').textContent = `Start Round ${currentRoundNumber}`;
+            }
+        }
+
+        // Selects 10 fresh, unplayed questions from the pool
+        function getFreshBatch() {
+            // Find all indices not yet played
+            let unplayedIndices = [];
+            for (let i = 0; i < quizQuestionsPool.length; i++) {
+                if (!playedIndices.includes(i)) {
+                    unplayedIndices.push(i);
+                }
+            }
+
+            // If not enough questions left for a full round, reset played list
+            if (unplayedIndices.length < QUESTIONS_PER_ROUND) {
+                playedIndices = [];
+                unplayedIndices = quizQuestionsPool.map((_, idx) => idx);
+            }
+
+            // Shuffle available unplayed indices
+            for (let i = unplayedIndices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [unplayedIndices[i], unplayedIndices[j]] = [unplayedIndices[j], unplayedIndices[i]];
+            }
+
+            // Pick first 10 unplayed questions
+            const selectedIndices = unplayedIndices.slice(0, QUESTIONS_PER_ROUND);
+            playedIndices.push(...selectedIndices);
+
+            return selectedIndices.map(idx => quizQuestionsPool[idx]);
+        }
+
+        // START A QUIZ ROUND
+        function startQuizRound() {
+            currentRoundQuestions = getFreshBatch();
+            currentQuestionIdx = 0;
+            score = 0;
+            timeSpentArray = [];
+
+            startScreen.classList.add('hidden');
+            resultsScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            clearInterval(timerInterval);
+            const currentQ = currentRoundQuestions[currentQuestionIdx];
+
+            explanationBox.classList.add('hidden');
+            nextBtn.disabled = true;
+            currentScoreEl.textContent = score;
+
+            questionCounter.textContent = `Question ${currentQuestionIdx + 1} of ${QUESTIONS_PER_ROUND}`;
+            categoryTag.textContent = currentQ.category;
+            questionText.textContent = currentQ.question;
+            
+            const progressPercent = ((currentQuestionIdx + 1) / QUESTIONS_PER_ROUND) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+
+            // Render option buttons
+            optionsContainer.innerHTML = '';
+            currentQ.options.forEach((optText, idx) => {
+                const button = document.createElement('button');
+                button.className = `option-btn w-full p-4 rounded-xl border text-left text-sm sm:text-base text-slate-200 flex items-center justify-between group`;
+                button.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-lg bg-slate-700/60 border border-slate-600 text-slate-300 font-mono text-xs flex items-center justify-center font-bold group-hover:bg-tealbrand-400 group-hover:text-slate-950 transition-colors">
+                            ${String.fromCharCode(65 + idx)}
+                        </span>
+                        <span class="font-medium">${optText}</span>
+                    </div>
+                    <i class="fa-regular fa-circle text-slate-600 group-hover:text-tealbrand-400 text-sm"></i>
+                `;
+                button.addEventListener('click', () => selectAnswer(idx));
+                optionsContainer.appendChild(button);
+            });
+
+            // Start 20s timer
+            timeLeft = 20;
+            timerText.textContent = `${timeLeft}s`;
+            timerText.classList.remove('timer-warning');
+            questionStartTime = Date.now();
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerText.textContent = `${timeLeft}s`;
+
+                if (timeLeft <= 5) {
+                    timerText.classList.add('timer-warning');
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    handleTimeOut();
+                }
+            }, 1000);
+        }
+
+        function selectAnswer(selectedIndex) {
+            clearInterval(timerInterval);
+            const timeTaken = Math.round((Date.now() - questionStartTime) / 1000);
+            timeSpentArray.push(timeTaken);
+
+            const currentQ = currentRoundQuestions[currentQuestionIdx];
+            const isCorrect = selectedIndex === currentQ.correct;
+
+            if (isCorrect) {
+                score++;
+                currentScoreEl.textContent = score;
+                playSound('correct');
+            } else {
+                playSound('wrong');
+            }
+
+            highlightOptions(selectedIndex, currentQ.correct);
+            showExplanation(isCorrect, currentQ);
+            nextBtn.disabled = false;
+        }
+
+        function handleTimeOut() {
+            timeSpentArray.push(20);
+            const currentQ = currentRoundQuestions[currentQuestionIdx];
+
+            playSound('wrong');
+            highlightOptions(null, currentQ.correct);
+            showExplanation(false, currentQ, true);
+            nextBtn.disabled = false;
+        }
+
+        function highlightOptions(selectedIdx, correctIdx) {
+            const buttons = optionsContainer.querySelectorAll('button');
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                const icon = btn.querySelector('i');
+
+                if (idx === correctIdx) {
+                    btn.classList.remove('bg-darkbg-card');
+                    btn.classList.add('bg-tealbrand-500/15', 'border-tealbrand-400', 'text-tealbrand-400', 'glow-teal');
+                    icon.className = 'fa-solid fa-circle-check text-tealbrand-400 text-lg';
+                } else if (idx === selectedIdx && selectedIdx !== correctIdx) {
+                    btn.classList.remove('bg-darkbg-card');
+                    btn.classList.add('bg-rose-500/15', 'border-rose-500', 'text-rose-400', 'glow-red');
+                    icon.className = 'fa-solid fa-circle-xmark text-rose-500 text-lg';
+                } else {
+                    btn.classList.add('opacity-40');
+                }
+            });
+        }
+
+        function showExplanation(isCorrect, questionObj, isTimeout = false) {
+            explanationBox.classList.remove('hidden');
+
+            if (isTimeout) {
+                explanationIcon.className = 'fa-solid fa-hourglass-end text-amber-400';
+                explanationStatus.className = 'font-bold block text-sm mb-1 text-amber-400';
+                explanationStatus.textContent = "Time Expired!";
+            } else if (isCorrect) {
+                explanationIcon.className = 'fa-solid fa-circle-check text-tealbrand-400';
+                explanationStatus.className = 'font-bold block text-sm mb-1 text-tealbrand-400';
+                explanationStatus.textContent = "Correct Answer!";
+            } else {
+                explanationIcon.className = 'fa-solid fa-circle-xmark text-rose-400';
+                explanationStatus.className = 'font-bold block text-sm mb-1 text-rose-400';
+                explanationStatus.textContent = "Incorrect";
+            }
+
+            explanationText.textContent = questionObj.explanation;
+        }
+
+        function handleNextQuestion() {
+            currentQuestionIdx++;
+            if (currentQuestionIdx < QUESTIONS_PER_ROUND) {
+                loadQuestion();
+            } else {
+                renderResultsScreen();
+            }
+        }
+
+        function renderResultsScreen() {
+            quizScreen.classList.add('hidden');
+            resultsScreen.classList.remove('hidden');
+
+            const total = QUESTIONS_PER_ROUND;
+            const percentage = Math.round((score / total) * 100);
+            const incorrect = total - score;
+            const avgSpeed = (timeSpentArray.reduce((a, b) => a + b, 0) / total).toFixed(1);
+
+            document.getElementById('finalScorePercent').textContent = `${percentage}%`;
+            document.getElementById('finalScoreFraction').textContent = `${score} of ${total}`;
+            document.getElementById('statTotal').textContent = total;
+            document.getElementById('statCorrect').textContent = score;
+            document.getElementById('statIncorrect').textContent = incorrect;
+            document.getElementById('statSpeed').textContent = `${avgSpeed}s`;
+
+            const resultTitle = document.getElementById('resultTitle');
+            const resultMessage = document.getElementById('resultMessage');
+            const scoreRing = document.getElementById('scoreRingBg');
+            const badgeIcon = document.getElementById('badgeIcon');
+            const badgeText = document.getElementById('badgeText');
+            const restartBtnText = document.getElementById('restartBtnText');
+
+            const remainingCount = quizQuestionsPool.length - playedIndices.length;
+            if (remainingCount >= QUESTIONS_PER_ROUND) {
+                restartBtnText.textContent = `Play Round ${Math.floor(playedIndices.length / QUESTIONS_PER_ROUND) + 1} (${remainingCount} Unplayed Left)`;
+            } else {
+                restartBtnText.textContent = `Play Again (Start Fresh 50-Question Pool)`;
+            }
+
+            if (percentage >= 90) {
+                resultTitle.textContent = "Cricket Mastermind! 🏆";
+                resultMessage.textContent = "Phenomenal performance! You have elite knowledge of cricket history & laws.";
+                scoreRing.className = "w-28 h-28 sm:w-36 sm:h-36 rounded-full border-4 border-tealbrand-400 flex items-center justify-center mx-auto bg-darkbg-card glow-teal";
+                badgeIcon.textContent = "👑";
+                badgeText.textContent = "Grand Tactician";
+            } else if (percentage >= 70) {
+                resultTitle.textContent = "Cricket Virtuoso! 🏏";
+                resultMessage.textContent = "Impressive knowledge! You clearly know the nuances of the game.";
+                scoreRing.className = "w-28 h-28 sm:w-36 sm:h-36 rounded-full border-4 border-tealbrand-400 flex items-center justify-center mx-auto bg-darkbg-card glow-teal";
+                badgeIcon.textContent = "⭐";
+                badgeText.textContent = "Cricket Aficionado";
+            } else if (percentage >= 50) {
+                resultTitle.textContent = "Solid Attempt! 👍";
+                resultMessage.textContent = "Good try! A bit more practice with laws and records will get you to top tier.";
+                scoreRing.className = "w-28 h-28 sm:w-36 sm:h-36 rounded-full border-4 border-amber-400 flex items-center justify-center mx-auto bg-darkbg-card";
+                badgeIcon.textContent = "🎯";
+                badgeText.textContent = "Promising Talent";
+            } else {
+                resultTitle.textContent = "Keep Learning! 📚";
+                resultMessage.textContent = "Don't worry! Explore Inside Cricket sections to polish your cricket IQ.";
+                scoreRing.className = "w-28 h-28 sm:w-36 sm:h-36 rounded-full border-4 border-rose-500 flex items-center justify-center mx-auto bg-darkbg-card";
+                badgeIcon.textContent = "🌱";
+                badgeText.textContent = "Rookie Enthusiast";
+            }
+
+            updatePoolUI();
+        }
+
+        function copyResultsToClipboard() {
+            const total = QUESTIONS_PER_ROUND;
+            const percentage = Math.round((score / total) * 100);
+            const roundNum = Math.floor(playedIndices.length / QUESTIONS_PER_ROUND);
+            const textToCopy = `🏏 Inside Cricket IQ Test (Round ${roundNum}):\nI scored ${score}/${total} (${percentage}%) on the Inside Cricket Quiz!\nTry out 50+ unique cricket questions on Inside Cricket!`;
+
+            const dummy = document.createElement('textarea');
+            document.body.appendChild(dummy);
+            dummy.value = textToCopy;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+
+            const origText = shareBtn.innerHTML;
+            shareBtn.innerHTML = `<i class="fa-solid fa-check text-tealbrand-400"></i><span>Copied to Clipboard!</span>`;
+            setTimeout(() => {
+                shareBtn.innerHTML = origText;
+            }, 2500);
+        }
+
+        // Initialize App on DOM Ready
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
