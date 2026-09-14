@@ -1,12 +1,17 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="An introduction to cricket, its history, and its global reach.">
-    <title>Inside Cricket | About Cricket</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An introduction to cricket, its history, and its global reach.">
+  <title>Inside Cricket | About Cricket</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
   <body>
     <header class="site-header">
       <nav class="nav" aria-label="Main navigation">
@@ -16,8 +21,8 @@
           <a href="world-cup.html">ODI World Cup Finals</a>
           <a href="#world">Global game</a>
          <a href="quiz.html">Cricket Quiz</a>
-          <a href="#dream-xi" class="text-slate-400 hover:text-brand-400 font-semibold transition-colors flex items-center gap-1.5">
-  <i class="fa-solid fa-shirt text-xs text-brand-400"></i>
+         <a href="#dream-xi" class="text-slate-400 hover:text-emerald-400 font-semibold transition-colors flex items-center gap-1.5">
+  <i class="fa-solid fa-shirt text-xs text-emerald-400"></i>
   <span>Dream XI</span>
 </a>
             
@@ -86,6 +91,528 @@
         </figure>
       </section>
     </main>
+    <!-- BEAUTIFIED SECTION: ALL-TIME XI DREAM TEAM BUILDER -->
+<section id="dream-xi" class="py-16 px-4 border-t border-white/10 relative overflow-hidden bg-gradient-to-b from-[#0a0f0d] via-[#111a15] to-[#0a0f0d]">
+  
+  <div class="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="absolute top-1/3 right-1/4 w-80 h-80 bg-brand-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider border border-emerald-500/30 mb-3 shadow-lg shadow-emerald-950/50">
+        <i class="fa-solid fa-crown text-amber-400 animate-pulse"></i> Tactical Squad Selector
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-black font-display text-white mb-3 tracking-tight">
+        Build Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-200 to-green-400">All-Time XI Dream Team</span>
+      </h2>
+      <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
+        Craft your ultimate cricket lineup across eras and watch your squad stats update on the stadium pitch in real time.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      
+      <div class="lg:col-span-5 bg-[#121a16]/90 backdrop-blur-xl rounded-3xl p-6 sm:p-7 border border-emerald-500/20 shadow-2xl flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between pb-4 mb-5 border-b border-white/10">
+            <h3 class="text-lg font-bold text-white flex items-center gap-2 font-display">
+              <i class="fa-solid fa-sliders text-emerald-400"></i> Squad Selectors
+            </h3>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-md border border-emerald-500/30">11 Players</span>
+          </div>
+          
+          <div class="space-y-4">
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-emerald-400/90 tracking-wider mb-1.5 flex items-center gap-1.5">
+                <i class="fa-solid fa-bolt text-xs"></i> Opening Batsmen
+              </label>
+              <div class="grid grid-cols-2 gap-2">
+                <select id="sel-op1" class="squad-select w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 outline-none transition-all">
+                  <optgroup label="India">
+                    <option value="sachin" selected>Sachin Tendulkar</option>
+                    <option value="sehwag">Virender Sehwag</option>
+                    <option value="sunil">Sunil Gavaskar</option>
+                    <option value="ganguly">Sourav Ganguly</option>
+                    <option value="gambhir">Gautam Gambhir</option>
+                    <option value="dhawan">Shikhar Dhawan</option>
+                  </optgroup>
+                  <optgroup label="Australia">
+                    <option value="hayden">Matthew Hayden</option>
+                    <option value="turner">Mark Taylor</option>
+                    <option value="slater">Michael Slater</option>
+                    <option value="justin">Justin Langer</option>
+                    <option value="finch">Aaron Finch</option>
+                    <option value="warner">David Warner</option>
+                  </optgroup>
+                  <optgroup label="West Indies">
+                    <option value="greenidge">Gordon Greenidge</option>
+                    <option value="haines">Desmond Haynes</option>
+                    <option value="cams">Chris Gayle</option>
+                    <option value="hinds">Worship Hinds</option>
+                  </optgroup>
+                  <optgroup label="England & South Africa">
+                    <option value="smith">Graeme Smith (SA)</option>
+                    <option value="bloem">Barry Richards (SA)</option>
+                    <option value="hutt">Andrew Strauss (ENG)</option>
+                    <option value="boycott">Geoffrey Boycott (ENG)</option>
+                    <option value="hutton">Len Hutton (ENG)</option>
+                    <option value="hobbs">Jack Hobbs (ENG)</option>
+                  </optgroup>
+                  <optgroup label="Pakistan, NZ & SL">
+                    <option value="anwar">Saeed Anwar (PAK)</option>
+                    <option value="hafeez">Mohammad Hafeez (PAK)</option>
+                    <option value="imam">Imam-ul-Haq (PAK)</option>
+                    <option value="richardson">John Wright (NZ)</option>
+                    <option value="latham">Tom Latham (NZ)</option>
+                    <option value="avishka">Marvan Atapattu (SL)</option>
+                    <option value="mubara">Tillakaratne Dilshan (SL)</option>
+                  </optgroup>
+                </select>
+                <select id="sel-op2" class="squad-select w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 outline-none transition-all">
+                  <optgroup label="Australia & India">
+                    <option value="gilchrist" selected>Adam Gilchrist (AUS)</option>
+                    <option value="rohit">Rohit Sharma (IND)</option>
+                    <option value="m_waugh">Mark Waugh (AUS)</option>
+                    <option value="shastri">Ravi Shastri (IND)</option>
+                    <option value="kl_rahul">KL Rahul (IND)</option>
+                    <option value="harsha">Mayank Agarwal (IND)</option>
+                  </optgroup>
+                  <optgroup label="England & NZ">
+                    <option value="cook">Alastair Cook (ENG)</option>
+                    <option value="hoggard">Marcus Trescothick (ENG)</option>
+                    <option value="hales">Alex Hales (ENG)</option>
+                    <option value="cronin">Brendon McCullum (NZ)</option>
+                    <option value="guptill">Martin Guptill (NZ)</option>
+                    <option value="fleming">Stephen Fleming (NZ)</option>
+                  </optgroup>
+                  <optgroup label="South Africa, WI & Pakistan">
+                    <option value="gibbs">Herschelle Gibbs (SA)</option>
+                    <option value="kirsten">Gary Kirsten (SA)</option>
+                    <option value="elgar">Dean Elgar (SA)</option>
+                    <option value="sarwan">Ramnaresh Sarwan (WI)</option>
+                    <option value="malik">Shoaib Malik (PAK)</option>
+                    <option value="fakhar">Fakhar Zaman (PAK)</option>
+                    <option value="rizwan">Mohammad Rizwan (PAK)</option>
+                    <option value="jayasuriya">Sanath Jayasuriya (SL)</option>
+                    <option value="avishka">Avishka Fernando (SL)</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-emerald-400/90 tracking-wider mb-1.5 flex items-center gap-1.5">
+                <i class="fa-solid fa-shield-halved text-xs"></i> Middle Order
+              </label>
+              <div class="grid grid-cols-2 gap-2">
+                <select id="sel-mid1" class="squad-select w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 outline-none transition-all">
+                  <optgroup label="Legends">
+                    <option value="bradman" selected>Sir Don Bradman (AUS)</option>
+                    <option value="ponting">Ricky Ponting (AUS)</option>
+                    <option value="dravid">Rahul Dravid (IND)</option>
+                    <option value="sangakkara">Kumar Sangakkara (SL)</option>
+                    <option value="root">Joe Root (ENG)</option>
+                    <option value="williamson">Kane Williamson (NZ)</option>
+                    <option value="miandad">Javed Miandad (PAK)</option>
+                    <option value="chappell">Greg Chappell (AUS)</option>
+                    <option value="harvey">Neil Harvey (AUS)</option>
+                    <option value="chandrasekhar">Viswanath (IND)</option>
+                    <option value="vengsarkar">Dilip Vengsarkar (IND)</option>
+                    <option value="azharuddin">Mohammad Azharuddin (IND)</option>
+                    <option value="mohammad">Hanif Mohammad (PAK)</option>
+                    <option value="inzamam">Inzamam-ul-Haq (PAK)</option>
+                    <option value="younis">Younis Khan (PAK)</option>
+                    <option value="mohammad_yousuf">Mohammad Yousuf (PAK)</option>
+                    <option value="aravinda">Aravinda de Silva (SL)</option>
+                    <option value="mahela">Mahela Jayawardene (SL)</option>
+                    <option value="angelo">Angelo Mathews (SL)</option>
+                    <option value="ross">Ross Taylor (NZ)</option>
+                    <option value="crowe">Martin Crowe (NZ)</option>
+                    <option value="graham">Graham Gooch (ENG)</option>
+                    <option value="pietersen">Kevin Pietersen (ENG)</option>
+                    <option value="thorp">Ian Bell (ENG)</option>
+                    <option value="collingwood">Paul Collingwood (ENG)</option>
+                    <option value="hashim">Daryll Cullinan (SA)</option>
+                    <option value="graeme_pollock">Graeme Pollock (SA)</option>
+                    <option value="hassan">Mushfiqur Rahim (BAN)</option>
+                  </optgroup>
+                </select>
+                <select id="sel-mid2" class="squad-select w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 outline-none transition-all">
+                  <optgroup label="Elites">
+                    <option value="kohli" selected>Virat Kohli (IND)</option>
+                    <option value="richards">Viv Richards (WI)</option>
+                    <option value="lara">Brian Lara (WI)</option>
+                    <option value="babar">Babar Azam (PAK)</option>
+                    <option value="amla">Hashim Amla (SA)</option>
+                    <option value="chanderpaul">Shivnarine Chanderpaul (WI)</option>
+                    <option value="rohan">Rohan Kanhai (WI)</option>
+                    <option value="garfield">Clive Lloyd (WI)</option>
+                    <option value="lloyd">Carl Hooper (WI)</option>
+                    <option value="head">Travis Head (AUS)</option>
+                    <option value="marnus">Marnus Labuschagne (AUS)</option>
+                    <option value="smith_steve">Steve Smith (AUS)</option>
+                    <option value="pujara">Cheteshwar Pujara (IND)</option>
+                    <option value="rahane">Ajinkya Rahane (IND)</option>
+                    <option value="shreyas">Shreyas Iyer (IND)</option>
+                    <option value="surya">Suryakumar Yadav (IND)</option>
+                    <option value="fawad">Fawad Alam (PAK)</option>
+                    <option value="saud">Saud Shakeel (PAK)</option>
+                    <option value="dimuth">Dimuth Karunaratne (SL)</option>
+                    <option value="dinesh">Dinesh Chandimal (SL)</option>
+                    <option value="tom_blundell">Tom Blundell (NZ)</option>
+                    <option value="henry_nicholls">Henry Nicholls (NZ)</option>
+                    <option value="zak_crawley">Zak Crawley (ENG)</option>
+                    <option value="ollie_pope">Ollie Pope (ENG)</option>
+                    <option value="harry_brook">Harry Brook (ENG)</option>
+                    <option value="adrian">Rassie van der Dussen (SA)</option>
+                    <option value="temba">Temba Bavuma (SA)</option>
+                    <option value="aidan">Aiden Markram (SA)</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-emerald-400/90 tracking-wider mb-1.5 flex items-center gap-1.5">
+                <i class="fa-solid fa-hands-holding text-xs"></i> Finisher & All-Rounder
+              </label>
+              <div class="grid grid-cols-2 gap-2">
+                <select id="sel-fin" class="squad-select w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 outline-none transition-all">
+                  <optgroup label="Finishers & Wicket-Keepers">
+                    <option value="dhoni" selected>MS Dhoni (IND)</option>
+                    <option value="abd">AB de Villiers (SA)</option>
+                    <option value="bevan">Michael Bevan (AUS)</option>
+                    <option value="buttler">Jos Buttler (ENG)</option>
+                    <option value="klusener">Lance Klusener (SA)</option>
+                    <option value="miller">David Miller (SA)</option>
+                    <option value="mccullum">Brendon McCullum (NZ)</option>
+                    <option value="pant">Rishabh Pant (IND)</option>
+                    <option value="dk">Dinesh Karthik (IND)</option>
+                    <option value="gilchrist_wk">Brad Haddin (AUS)</option>
+                    <option value="marsh">Rod Marsh (AUS)</option>
+                    <option value="healy">Ian Healy (AUS)</option>
+                    <option value="taibu">Tatenda Taibu (ZIM)</option>
+                    <option value="flower">Andy Flower (ZIM)</option>
+                    <option value="parthiv">Parthiv Patel (IND)</option>
+                    <option value="latif">Rashid Latif (PAK)</option>
+                    <option value="moeen">Moin Khan (PAK)</option>
+                    <option value="sarfaraz">Sarfaraz Ahmed (PAK)</option>
+                    <option value="joyce">Kumarākulasuriya (SL)</option>
+                    <option value="dickwella">Niroshan Dickwella (SL)</option>
+                    <option value="bj_watling">BJ Watling (NZ)</option>
+                    <option value="tom_latham">Tom Latham (NZ)</option>
+                    <option value="bairstow">Jonny Bairstow (ENG)</option>
+                    <option value="matt_prior">Matt Prior (ENG)</option>
+                    <option value="quinton">Quinton de Kock (SA)</option>
+                    <option value="mark_boucher">Mark Boucher (SA)</option>
+                    <option value="dave_richardson">Dave Richardson (SA)</option>
+                  </optgroup>
+                </select>
+                <select id="sel-ar" class="squad-select w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 outline-none transition-all">
+                  <optgroup label="All-Rounders">
+                    <option value="sobers" selected>Sir Garfield Sobers (WI)</option>
+                    <option value="kallis">Jacques Kallis (SA)</option>
+                    <option value="kapil">Kapil Dev (IND)</option>
+                    <option value="botham">Ian Botham (ENG)</option>
+                    <option value="imran">Imran Khan (PAK)</option>
+                    <option value="flintoff">Andrew Flintoff (ENG)</option>
+                    <option value="shakib">Shakib Al Hasan (BAN)</option>
+                    <option value="stokes">Ben Stokes (ENG)</option>
+                    <option value="richard_hadlee">Sir Richard Hadlee (NZ)</option>
+                    <option value="cairns">Chris Cairns (NZ)</option>
+                    <option value="vettori">Daniel Vettori (NZ)</option>
+                    <option value="proctor">Mike Procter (SA)</option>
+                    <option value="pollock_shawn">Shaun Pollock (SA)</option>
+                    <option value="lance">Lance Klusener (SA)</option>
+                    <option value="abdul_razzaq">Abdul Razzaq (PAK)</option>
+                    <option value="shoaib_malik">Shoaib Malik (PAK)</option>
+                    <option value="shadab">Shadab Khan (PAK)</option>
+                    <option value="marvan">Tillakaratne Dilshan (SL)</option>
+                    <option value="chaminda">Chaminda Vaas (SL)</option>
+                    <option value="anjelo">Angelo Mathews (SL)</option>
+                    <option value="wanindu">Wanindu Hasaranga (SL)</option>
+                    <option value="ashwin_ar">R. Ashwin (IND)</option>
+                    <option value="jadeja">Ravindra Jadeja (IND)</option>
+                    <option value="axar">Axar Patel (IND)</option>
+                    <option value="hardik">Hardik Pandya (IND)</option>
+                    <option value="watson">Shane Watson (AUS)</option>
+                    <option value="symonds">Andrew Symonds (AUS)</option>
+                    <option value="miller_c">Cameron Green (AUS)</option>
+                    <option value="jason_holder">Jason Holder (WI)</option>
+                    <option value="dwayne_bravo">Dwayne Bravo (WI)</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-emerald-400/90 tracking-wider mb-1.5 flex items-center gap-1.5">
+                <i class="fa-solid fa-bowling-ball text-xs"></i> Bowling Unit (Spin & Pace)
+              </label>
+              <div class="grid grid-cols-2 gap-2 mb-2">
+                <select id="sel-spin1" class="squad-select w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-emerald-400 outline-none transition-all">
+                  <optgroup label="Spinners 1">
+                    <option value="warne" selected>Shane Warne (AUS)</option>
+                    <option value="kumble">Anil Kumble (IND)</option>
+                    <option value="rana">Abdul Qadir (PAK)</option>
+                    <option value="swann">Graeme Swann (ENG)</option>
+                    <option value="lyon">Nathan Lyon (AUS)</option>
+                    <option value="bedi">Bishan Bedi (IND)</option>
+                    <option value="chandrasekhar_s">BS Chandrasekhar (IND)</option>
+                    <option value="prasanna">Erapalli Prasanna (IND)</option>
+                    <option value="venkat">Srinivas Venkataraghavan (IND)</option>
+                    <option value="harbhajan">Harbhajan Singh (IND)</option>
+                    <option value="kuldeep">Kuldeep Yadav (IND)</option>
+                    <option value="stuart_macgill">Stuart MacGill (AUS)</option>
+                    <option value="richie_benaud">Richie Benaud (AUS)</option>
+                    <option value="dereks">Derek Underwood (ENG)</option>
+                    <option value="jim_leaker">Jim Laker (ENG)</option>
+                    <option value="phil_tufnell">Phil Tufnell (ENG)</option>
+                    <option value="monty">Monty Panesar (ENG)</option>
+                    <option value="paul_adams">Paul Adams (SA)</option>
+                    <option value="hugh">Hugh Tayfield (SA)</option>
+                    <option value="imran_tahir">Imran Tahir (SA)</option>
+                    <option value="mushtaq">Mushtaq Ahmed (PAK)</option>
+                    <option value="danish">Danish Kaneria (PAK)</option>
+                    <option value="yasir">Yasir Shah (PAK)</option>
+                    <option value="ajaz">Ajaz Patel (NZ)</option>
+                  </optgroup>
+                </select>
+                <select id="sel-spin2" class="squad-select w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-emerald-400 outline-none transition-all">
+                  <optgroup label="Spinners 2">
+                    <option value="murali" selected>M. Muralitharan (SL)</option>
+                    <option value="ashwin">R. Ashwin (IND)</option>
+                    <option value="herath">Rangana Herath (SL)</option>
+                    <option value="saqlain">Saqlain Mushtaq (PAK)</option>
+                    <option value="narine">Sunil Narine (WI)</option>
+                    <option value="akhtar_s">Axar Patel (IND)</option>
+                    <option value="bishoo">Devendra Bishoo (WI)</option>
+                    <option value="kieran">Kieran Pollard (WI)</option>
+                    <option value="rexx">Lance Gibbs (WI)</option>
+                    <option value="alfred">Sonny Ramdin (WI)</option>
+                    <option value="alfie">Alf Valentine (WI)</option>
+                    <option value="adam_zampa">Adam Zampa (AUS)</option>
+                    <option value="ashton">Ashton Agar (AUS)</option>
+                    <option value="rehan">Rehan Ahmed (ENG)</option>
+                    <option value="jack_leech">Jack Leach (ENG)</option>
+                    <option value="tabraiz">Tabraiz Shamsi (SA)</option>
+                    <option value="keshav">Keshav Maharaj (SA)</option>
+                    <option value="mohammad_rafique">Mohammad Rafique (BAN)</option>
+                    <option value="mehidy">Mehidy Hasan Miraz (BAN)</option>
+                    <option value="prabath">Prabath Jayasuriya (SL)</option>
+                    <option value="akila">Akila Dananjaya (SL)</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <select id="sel-pace1" class="squad-select w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-emerald-400 outline-none transition-all">
+                  <optgroup label="Fast Bowlers 1">
+                    <option value="wasim" selected>Wasim Akram (PAK)</option>
+                    <option value="mcgrath">Glenn McGrath (AUS)</option>
+                    <option value="ambrose">Curtly Ambrose (WI)</option>
+                    <option value="marshall">Malcolm Marshall (WI)</option>
+                    <option value="broad">Stuart Broad (ENG)</option>
+                    <option value="walsh">Courtney Walsh (WI)</option>
+                    <option value="holding">Michael Holding (WI)</option>
+                    <option value="roberts">Andy Roberts (WI)</option>
+                    <option value="garner">Joel Garner (WI)</option>
+                    <option value="cronje">Colin Croft (WI)</option>
+                    <option value="srinath">Javagal Srinath (IND)</option>
+                    <option value="zaheer">Zaheer Khan (IND)</option>
+                    <option value="ishant">Ishant Sharma (IND)</option>
+                    <option value="shami">Mohammed Shami (IND)</option>
+                    <option value="siraj">Mohammed Siraj (IND)</option>
+                    <option value="kapil_dev">Kapil Dev (IND)</option>
+                    <option value="carlleto">Dennis Lillee (AUS)</option>
+                    <option value="thompson">Jeff Thomson (AUS)</option>
+                    <option value="gillespie">Jason Gillespie (AUS)</option>
+                    <option value="kasprowicz">Michael Kasprowicz (AUS)</option>
+                    <option value="brian_statham">Brian Statham (ENG)</option>
+                    <option value="fred_trueman">Fred Trueman (ENG)</option>
+                    <option value="bob_willis">Bob Willis (ENG)</option>
+                    <option value="darren_gough">Darren Gough (ENG)</option>
+                    <option value="allan_donald">Allan Donald (SA)</option>
+                    <option value="fanie">Fanie de Villiers (SA)</option>
+                    <option value="morne">Morne Morkel (SA)</option>
+                  </optgroup>
+                </select>
+                <select id="sel-pace2" class="squad-select w-full bg-black/60 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-emerald-400 outline-none transition-all">
+                  <optgroup label="Fast Bowlers 2">
+                    <option value="steyn" selected>Dale Steyn (SA)</option>
+                    <option value="starc">Mitchell Starc (AUS)</option>
+                    <option value="anderson">James Anderson (ENG)</option>
+                    <option value="waqar">Waqar Younis (PAK)</option>
+                    <option value="bumrah">Jasprit Bumrah (IND)</option>
+                    <option value="akhtar">Shoaib Akhtar (PAK)</option>
+                    <option value="saeed_ajmal">Mohammad Asif (PAK)</option>
+                    <option value="shaheen">Shaheen Afridi (PAK)</option>
+                    <option value="naseem">Naseem Shah (PAK)</option>
+                    <option value="hasan_ali">Hasan Ali (PAK)</option>
+                    <option value="lee">Brett Lee (AUS)</option>
+                    <option value="cummins">Pat Cummins (AUS)</option>
+                    <option value="josh">Josh Hazlewood (AUS)</option>
+                    <option value="boland">Scott Boland (AUS)</option>
+                    <option value="jhye">Jhye Richardson (AUS)</option>
+                    <option value="mark_wood">Mark Wood (ENG)</option>
+                    <option value="jofra">Jofra Archer (ENG)</option>
+                    <option value="chris_woakes">Chris Woakes (ENG)</option>
+                    <option value="ollie_robinson">Ollie Robinson (ENG)</option>
+                    <option value="vernon">Vernon Philander (SA)</option>
+                    <option value="kagiso">Kagiso Rabada (SA)</option>
+                    <option value="lungi">Lungi Ngidi (SA)</option>
+                    <option value="nortje">Anrich Nortje (SA)</option>
+                    <option value="trent_boult">Trent Boult (NZ)</option>
+                    <option value="tim_southee">Tim Southee (NZ)</option>
+                    <option value="neil_wagner">Neil Wagner (NZ)</option>
+                    <option value="lockie">Lockie Ferguson (NZ)</option>
+                    <option value="matt_henry">Matt Henry (NZ)</option>
+                    <option value="lasith">Lasith Malinga (SL)</option>
+                    <option value="dilhara">Nuwan Kulasekara (SL)</option>
+                    <option value="chaminda_v">Dilhara Fernando (SL)</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-white/10">
+          <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="p-3 rounded-2xl bg-black/50 border border-emerald-500/20 text-center">
+              <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block">Int'l Runs</span>
+              <p id="stat-total-runs" class="text-xl font-extrabold text-emerald-400 font-display mt-0.5">140,000+</p>
+            </div>
+            <div class="p-3 rounded-2xl bg-black/50 border border-emerald-500/20 text-center">
+              <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block">Int'l Wickets</span>
+              <p id="stat-total-wickets" class="text-xl font-extrabold text-teal-300 font-display mt-0.5">3,500+</p>
+            </div>
+          </div>
+
+          <button id="btn-share-team" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-400 hover:to-green-400 text-black font-black rounded-xl transition-all shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2 text-xs uppercase tracking-wider cursor-pointer">
+            <i class="fa-solid fa-share-nodes"></i>
+            <span>Copy Dream XI Lineup</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 bg-[#121a16]/90 backdrop-blur-xl rounded-3xl p-6 border border-emerald-500/20 shadow-2xl flex flex-col justify-between relative min-h-[500px]">
+        
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-bold text-white font-display flex items-center gap-2">
+            <i class="fa-solid fa-stadium text-emerald-400"></i> Field Formation
+          </h3>
+          <div class="flex items-center gap-2 text-[10px] uppercase font-bold text-slate-400">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span> Tactical Ground View
+          </div>
+        </div>
+
+        <div class="w-full flex-1 rounded-2xl bg-gradient-to-b from-emerald-950/80 via-emerald-900/60 to-emerald-950/80 border border-emerald-500/30 relative p-4 sm:p-6 flex flex-col justify-between overflow-hidden shadow-inner">
+          <div class="absolute inset-x-1/3 top-0 bottom-0 border-x border-white/5 bg-amber-900/10 pointer-events-none"></div>
+
+          <div class="flex justify-around items-center z-10">
+            <div class="text-center transform hover:scale-105 transition-transform">
+              <span class="inline-block px-3 py-1.5 rounded-xl bg-black/80 border border-emerald-400/50 text-emerald-300 font-bold text-xs shadow-xl backdrop-blur-md" id="card-op1">S. Tendulkar</span>
+              <p class="text-[9px] text-slate-300 mt-1 font-semibold">Opener 1</p>
+            </div>
+            <div class="text-center transform hover:scale-105 transition-transform">
+              <span class="inline-block px-3 py-1.5 rounded-xl bg-black/80 border border-emerald-400/50 text-emerald-300 font-bold text-xs shadow-xl backdrop-blur-md" id="card-op2">A. Gilchrist</span>
+              <p class="text-[9px] text-slate-300 mt-1 font-semibold">Opener 2</p>
+            </div>
+          </div>
+
+          <div class="flex justify-around items-center z-10 my-3">
+            <div class="text-center transform hover:scale-105 transition-transform">
+              <span class="inline-block px-3 py-1.5 rounded-xl bg-black/80 border border-white/20 text-white font-bold text-xs shadow-xl backdrop-blur-md" id="card-mid1">D. Bradman</span>
+              <p class="text-[9px] text-slate-300 mt-1 font-semibold">No. 3</p>
+            </div>
+            <div class="text-center transform hover:scale-105 transition-transform">
+              <span class="inline-block px-3 py-1.5 rounded-xl bg-black/80 border border-white/20 text-white font-bold text-xs shadow-xl backdrop-blur-md" id="card-mid2">V. Kohli</span>
+              <p class="text-[9px] text-slate-300 mt-1 font-semibold">No. 4</p>
+            </div>
+            <div class="text-center transform hover:scale-105 transition-transform">
+              <span class="inline-block px-3 py-1.5 rounded-xl bg-black/80 border border-amber-400/50 text-amber-300 font-bold text-xs shadow-xl backdrop-blur-md" id="card-fin">M.S. Dhoni</span>
+              <p class="text-[9px] text-slate-300 mt-1 font-semibold">WK / Finisher</p>
+            </div>
+          </div>
+
+          <div class="flex justify-center items-center z-10 my-1">
+            <div class="text-center transform hover:scale-105 transition-transform">
+              <span class="inline-block px-4 py-1.5 rounded-xl bg-amber-500/20 border border-amber-400/60 text-amber-300 font-bold text-xs shadow-xl backdrop-blur-md" id="card-ar">G. Sobers</span>
+              <p class="text-[9px] text-amber-300/80 mt-1 font-semibold">All-Rounder</p>
+            </div>
+          </div>
+
+          <div class="flex justify-around items-center z-10 mt-2">
+            <div class="text-center transform hover:scale-105 transition-transform">
+              <span class="inline-block px-2.5 py-1 rounded-xl bg-black/80 border border-cyan-400/50 text-cyan-300 font-bold text-xs shadow-xl backdrop-blur-md" id="card-spin1">S. Warne</span>
+              <p class="text-[9px] text-slate-300 mt-1 font-semibold">Spinner 1</p>
+            </div>
+            <div class="text-center transform hover:scale-105 transition-transform">
+              <span class="inline-block px-2.5 py-1 rounded-xl bg-black/80 border border-cyan-400/50 text-cyan-300 font-bold text-xs shadow-xl backdrop-blur-md" id="card-spin2">M. Murali</span>
+              <p class="text-[9px] text-slate-300 mt-1 font-semibold">Spinner 2</p>
+            </div>
+            <div class="text-center transform hover:scale-105 transition-transform">
+              <span class="inline-block px-2.5 py-1 rounded-xl bg-black/80 border border-rose-400/50 text-rose-300 font-bold text-xs shadow-xl backdrop-blur-md" id="card-pace1">W. Akram</span>
+              <p class="text-[9px] text-slate-300 mt-1 font-semibold">Pacer 1</p>
+            </div>
+            <div class="text-center transform hover:scale-105 transition-transform">
+              <span class="inline-block px-2.5 py-1 rounded-xl bg-black/80 border border-rose-400/50 text-rose-300 font-bold text-xs shadow-xl backdrop-blur-md" id="card-pace2">D. Steyn</span>
+              <p class="text-[9px] text-slate-300 mt-1 font-semibold">Pacer 2</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const selects = {
+      'sel-op1': 'card-op1',
+      'sel-op2': 'card-op2',
+      'sel-mid1': 'card-mid1',
+      'sel-mid2': 'card-mid2',
+      'sel-fin': 'card-fin',
+      'sel-ar': 'card-ar',
+      'sel-spin1': 'card-spin1',
+      'sel-spin2': 'card-spin2',
+      'sel-pace1': 'card-pace1',
+      'sel-pace2': 'card-pace2'
+    };
+
+    Object.keys(selects).forEach(id => {
+      const el = document.getElementById(id);
+      if(el) {
+        el.addEventListener('change', (e) => {
+          const selectedText = e.target.options[e.target.selectedIndex].text;
+          document.getElementById(selects[id]).textContent = selectedText.split(' (')[0];
+        });
+      }
+    });
+
+    const btnShare = document.getElementById('btn-share-team');
+    if(btnShare) {
+      btnShare.addEventListener('click', () => {
+        let lineup = "🏏 My All-Time XI Cricket Dream Squad:\n";
+        Object.keys(selects).forEach((id, idx) => {
+          const el = document.getElementById(id);
+          lineup += `${idx + 1}. ${el.options[el.selectedIndex].text}\n`;
+        });
+        
+        navigator.clipboard.writeText(lineup).then(() => {
+          btnShare.innerHTML = `<i class="fa-solid fa-check text-black"></i> <span>Copied to Clipboard!</span>`;
+          setTimeout(() => {
+            btnShare.innerHTML = `<i class="fa-solid fa-share-nodes"></i> <span>Copy Dream XI Lineup</span>`;
+          }, 2500);
+        });
+      });
+    }
+  });
+</script>
 
     <footer class="footer"><div class="footer-inner"><span>Inside Cricket — an educational introduction to the game.</span><span>Built from supplied cricket-history and World Cup resources.</span></div></footer>
   </body>
