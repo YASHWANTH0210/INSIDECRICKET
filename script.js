@@ -280,25 +280,28 @@ const directoryStadiums = {
   }
 };
 
-// Event listener updates capacities, format-wise scores, pitch traits, description, and preview photo instantly
-const dirSelect = document.getElementById('dir-sel-stadium');
-if(dirSelect) {
-  dirSelect.addEventListener('change', (e) => {
-    const val = e.target.value;
-    const data = directoryStadiums[val];
-    if(data) {
-      document.getElementById('dir-title').textContent = data.name;
-      document.getElementById('dir-country-badge').textContent = data.country;
-      document.getElementById('dir-loc').textContent = data.loc;
-      document.getElementById('dir-capacity').textContent = data.cap;
-      document.getElementById('dir-boundaries').textContent = data.bounds;
-      document.getElementById('dir-test-score').textContent = data.testScore;
-      document.getElementById('dir-odi-score').textContent = data.odiScore;
-      document.getElementById('dir-t20-score').textContent = data.t20Score;
-      document.getElementById('dir-pitch').textContent = data.pitch;
-      document.getElementById('dir-desc').textContent = data.desc;
-      document.getElementById('dir-bg').style.backgroundImage = `url('${data.img}')`;
-      document.getElementById('dir-thumb').src = data.img;
-    }
+document.addEventListener('DOMContentLoaded', () => {
+  const dirSelect = document.getElementById('dir-sel-stadium');
+  if(dirSelect) {
+    dirSelect.addEventListener('change', (e) => {
+      const val = e.target.value;
+      const data = directoryStadiums[val];
+      if(data) {
+        document.getElementById('dir-title').textContent = data.name;
+        document.getElementById('dir-country-badge').textContent = data.country;
+        document.getElementById('dir-loc').textContent = data.loc;
+        document.getElementById('dir-capacity').textContent = data.cap;
+        document.getElementById('dir-boundaries').textContent = data.bounds;
+        document.getElementById('dir-test-score').textContent = data.testScore;
+        document.getElementById('dir-odi-score').textContent = data.odiScore;
+        document.getElementById('dir-t20-score').textContent = data.t20Score;
+        document.getElementById('dir-pitch').textContent = data.pitch;
+        document.getElementById('dir-desc').textContent = data.desc;
+        document.getElementById('dir-bg').style.backgroundImage = `url('${data.img}')`;
+        document.getElementById('dir-thumb').src = data.img;
+      }
+    });
+  }
+});
   });
 }
