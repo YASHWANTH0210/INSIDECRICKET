@@ -279,6 +279,7 @@ const directoryStadiums = {
     desc: "Guinness World Record holder for hosting the most One Day Internationals." 
   }
 };
+
 document.addEventListener('DOMContentLoaded', () => {
   const dirSelect = document.getElementById('dir-sel-stadium');
   const confirmBtn = document.getElementById('dir-confirm-btn');
