@@ -281,13 +281,11 @@ const directoryStadiums = {
 };
 document.addEventListener('DOMContentLoaded', () => {
   const dirSelect = document.getElementById('dir-sel-stadium');
-  console.log("Stadium selector found:", dirSelect); // Check if this prints in your console
-  
-  if(dirSelect) {
-    dirSelect.addEventListener('change', (e) => {
-      const val = e.target.value;
-      console.log("Selected stadium value:", val); // Check if this prints when you change options
-      
+  const confirmBtn = document.getElementById('dir-confirm-btn');
+
+  if(confirmBtn && dirSelect) {
+    confirmBtn.addEventListener('click', () => {
+      const val = dirSelect.value;
       const data = directoryStadiums[val];
       if(data) {
         document.getElementById('dir-title').textContent = data.name;
@@ -302,11 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('dir-desc').textContent = data.desc;
         document.getElementById('dir-bg').style.backgroundImage = `url('${data.img}')`;
         document.getElementById('dir-thumb').src = data.img;
-      } else {
-        console.warn("No data found for stadium key:", val);
       }
     });
   }
 });
-
-
