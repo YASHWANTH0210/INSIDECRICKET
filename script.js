@@ -66,24 +66,3 @@ filters.forEach((filter) => {
   });
 });
 
-document.querySelectorAll('.squad-select').forEach((select, index) => {
-  select.addEventListener('change', (e) => {
-    const targetCard = document.querySelectorAll('.field-player-name')[index];
-    if (targetCard) targetCard.textContent = e.target.value;
-  });
-});
-const copyBtn = document.getElementById('btn-copy-lineup');
-if (copyBtn) {
-  copyBtn.addEventListener('click', () => {
-    const players = Array.from(document.querySelectorAll('.field-player-name'))
-                         .map(el => el.textContent)
-                         .join(', ');
-    navigator.clipboard.writeText(`My Dream XI Lineup: ${players}`).then(() => {
-      copyBtn.innerHTML = `<i class="fa-solid fa-check text-black"></i> <span>Copied to Clipboard!</span>`;
-      setTimeout(() => {
-        copyBtn.innerHTML = `<i class="fa-solid fa-share-nodes"></i> <span>Copy Dream XI Lineup</span>`;
-      }, 2500);
-    });
-  });
-}
-        
