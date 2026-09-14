@@ -613,152 +613,71 @@
     }
   });
 </script>
-  
-<!-- STANDALONE STADIUM DIRECTORY & PITCH ANALYZER -->
-<section id="stadium-directory" class="py-16 px-4 border-t border-white/10 relative overflow-hidden bg-gradient-to-b from-[#0a0f0d] via-[#111a15] to-[#0a0f0d]">
-  
-  <div class="absolute top-1/3 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-
-  <div class="max-w-6xl mx-auto relative z-10">
-    
-    <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider border border-emerald-500/30 mb-3 shadow-lg shadow-emerald-950/50">
-        <i class="fa-solid fa-earth-americas text-emerald-400 animate-pulse"></i> Global Venue Database
-      </div>
-      <h2 class="text-3xl sm:text-5xl font-black font-display text-white mb-3 tracking-tight">
-        World Cricket <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-200 to-green-400">Stadium Explorer</span>
-      </h2>
-      <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
-        Inspect legendary international grounds with deep historical insights, exact capacities, boundary sizes, format-wise average scores, and authentic venue photos.
-      </p>
-    </div>
-
-    <!-- MAIN INTERACTIVE STADIUM VIEWER CARD -->
-    <div class="bg-[#121a16]/90 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-emerald-500/20 shadow-2xl relative overflow-hidden">
-      <div class="absolute inset-0 z-0 opacity-25 bg-cover bg-center transition-all duration-700" id="dir-bg" style="background-image: url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1400&q=80')"></div>
-      <div class="absolute inset-0 bg-gradient-to-r from-[#121a16] via-[#121a16]/95 to-[#121a16]/85 z-0"></div>
-
-      <div class="relative z-10">
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between pb-6 mb-8 border-b border-white/10 gap-4">
-          <div>
-            <div class="flex items-center gap-2 mb-2">
-              <span id="dir-country-badge" class="text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-md border border-emerald-500/30">England</span>
-              <span id="dir-loc" class="text-xs text-slate-300 font-semibold">London, England</span>
-            </div>
-            <h3 id="dir-title" class="text-2xl sm:text-3xl font-black text-white font-display">Lord's Cricket Ground</h3>
-          </div>
-          <div class="w-full md:w-80">
-            <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1 tracking-wider">Select Venue</label>
-            <select id="dir-sel-stadium" class="w-full bg-black/80 border border-emerald-500/40 rounded-xl px-3.5 py-3 text-xs text-white focus:border-emerald-400 outline-none transition-all shadow-lg font-semibold cursor-pointer">
-              <optgroup label="England & Wales">
-                <option value="lords" selected>Lord's, London</option>
-                <option value="oval">The Oval, London</option>
-                <option value="edgbaston">Edgbaston, Birmingham</option>
-                <option value="headingley">Headingley, Leeds</option>
-                <option value="oldtrafford">Old Trafford, Manchester</option>
-                <option value="trentbridge">Trent Bridge, Nottingham</option>
-              </optgroup>
-              <optgroup label="Australia">
-                <option value="mcg">Melbourne Cricket Ground (MCG)</option>
-                <option value="scg">Sydney Cricket Ground (SCG)</option>
-                <option value="optus">Optus Stadium, Perth</option>
-                <option value="gabba">The Gabba, Brisbane</option>
-                <option value="adelaide">Adelaide Oval, Adelaide</option>
-              </optgroup>
-              <optgroup label="India">
-                <option value="eden">Eden Gardens, Kolkata</option>
-                <option value="wankhede">Wankhede Stadium, Mumbai</option>
-                <option value="m_chinaswamy">M. Chinnaswamy Stadium, Bengaluru</option>
-                <option value="narendra_modi">Narendra Modi Stadium, Ahmedabad</option>
-                <option value="chepauk">M.A. Chidambaram Stadium, Chennai</option>
-                <option value="arun_jaitley">Arun Jaitley Stadium, Delhi</option>
-                <option value="rajiv_gandhi">Rajiv Gandhi Stadium, Hyderabad</option>
-                <option value="hpca_dharamshala">HPCA Stadium, Dharamshala</option>
-              </optgroup>
-              <optgroup label="Pakistan">
-                <option value="gaddafi">Gaddafi Stadium, Lahore</option>
-                <option value="national_stadium">National Stadium, Karachi</option>
-                <option value="rawalpindi">Rawalpindi Cricket Stadium</option>
-              </optgroup>
-              <optgroup label="South Africa">
-                <option value="wanderers">The Wanderers Stadium, Johannesburg</option>
-                <option value="superport">SuperSport Park, Centurion</option>
-                <option value="newlands">Newlands, Cape Town</option>
-              </optgroup>
-              <optgroup label="New Zealand">
-                <option value="eden_park">Eden Park, Auckland</option>
-                <option value="hagley_oval">Hagley Oval, Christchurch</option>
-                <option value="basin_reserve">Basin Reserve, Wellington</option>
-              </optgroup>
-              <optgroup label="West Indies">
-                <option value="kensington">Kensington Oval, Barbados</option>
-                <option value="queen_park_oval">Queen's Park Oval, Trinidad</option>
-              </optgroup>
-              <optgroup label="Sri Lanka">
-                <option value="r_premadasa">R. Premadasa Stadium, Colombo</option>
-                <option value="galle">Galle International Stadium, Galle</option>
-              </optgroup>
-              <optgroup label="Bangladesh & UAE">
-                <option value="shere_bangla">Sher-e-Bangla Stadium, Mirpur</option>
-                <option value="dubai_intl">Dubai International Stadium, UAE</option>
-                <option value="sharjah">Sharjah Cricket Stadium, UAE</option>
-              </optgroup>
-            </select>
-          </div>
-        </div>
-
-        <!-- METRICS GRID INCLUDING FORMAT-WISE SCORES -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <div class="p-4 rounded-2xl bg-black/60 border border-white/10 shadow-lg">
-            <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mb-1">Capacity & Boundaries</span>
-            <p id="dir-capacity" class="text-sm font-extrabold text-white font-display mb-1">31,000 Seats</p>
-            <p id="dir-boundaries" class="text-xs font-semibold text-emerald-400">Sq: 65m | Str: 75m</p>
-          </div>
-
-          <div class="p-4 rounded-2xl bg-black/60 border border-white/10 shadow-lg">
-            <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mb-1"><i class="fa-solid fa-trophy text-amber-400"></i> Test Avg 1st Innings</span>
-            <p id="dir-test-score" class="text-base sm:text-lg font-extrabold text-teal-300 font-display">315 Runs</p>
-            <span class="text-[9px] text-slate-400">Historical Par Score</span>
-          </div>
-
-          <div class="p-4 rounded-2xl bg-black/60 border border-white/10 shadow-lg">
-            <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mb-1"><i class="fa-solid fa-bolt text-teal-400"></i> ODI Avg 1st Innings</span>
-            <p id="dir-odi-score" class="text-base sm:text-lg font-extrabold text-teal-300 font-display">262 Runs</p>
-            <span class="text-[9px] text-slate-400">Limited Overs Par</span>
-          </div>
-
-          <div class="p-4 rounded-2xl bg-black/60 border border-white/10 shadow-lg">
-            <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mb-1"><i class="fa-solid fa-fire text-rose-400"></i> T20I Avg 1st Innings</span>
-            <p id="dir-t20-score" class="text-base sm:text-lg font-extrabold text-teal-300 font-display">175 Runs</p>
-            <span class="text-[9px] text-slate-400">Domestic & Intl T20</span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-          <div class="bg-black/50 p-4 rounded-2xl border border-white/5 md:col-span-2">
-            <div class="flex items-center justify-between mb-2">
-              <h4 class="text-xs uppercase font-bold text-emerald-400 tracking-wider flex items-center gap-2">
-                <i class="fa-solid fa-circle-info"></i> Pitch Behavior & Overview
-              </h4>
-              <span id="dir-pitch" class="text-xs font-bold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Balanced & Slopes</span>
-            </div>
-            <p id="dir-desc" class="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              Established in 1814 and owned by Marylebone Cricket Club (MCC), Lord's is widely revered as the "Home of Cricket", featuring an iconic sloping outfield and rich heritage.
-            </p>
-          </div>
-          
-          <div class="rounded-2xl overflow-hidden border border-emerald-500/30 h-32 relative shadow-lg">
-            <img id="dir-thumb" src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=600&q=80" alt="Stadium Photo" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5">
-              <span class="text-[10px] font-bold text-white flex items-center gap-1.5"><i class="fa-solid fa-camera text-emerald-400"></i> Authentic Venue View</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
+    <div class="w-full md:w-96">
+  <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1 tracking-wider">Select Venue</label>
+  <div class="flex gap-2">
+    <select id="dir-sel-stadium" class="w-full bg-black/85 border border-emerald-500/40 rounded-xl px-3.5 py-3 text-xs text-white focus:border-emerald-400 outline-none transition-all shadow-lg font-semibold cursor-pointer">
+      <optgroup label="England & Wales">
+        <option value="lords" selected>Lord's, London</option>
+        <option value="oval">The Oval, London</option>
+        <option value="edgbaston">Edgbaston, Birmingham</option>
+        <option value="headingley">Headingley, Leeds</option>
+        <option value="oldtrafford">Old Trafford, Manchester</option>
+        <option value="trentbridge">Trent Bridge, Nottingham</option>
+      </optgroup>
+      <optgroup label="Australia">
+        <option value="mcg">Melbourne Cricket Ground (MCG)</option>
+        <option value="scg">Sydney Cricket Ground (SCG)</option>
+        <option value="optus">Optus Stadium, Perth</option>
+        <option value="gabba">The Gabba, Brisbane</option>
+        <option value="adelaide">Adelaide Oval, Adelaide</option>
+      </optgroup>
+      <optgroup label="India">
+        <option value="eden">Eden Gardens, Kolkata</option>
+        <option value="wankhede">Wankhede Stadium, Mumbai</option>
+        <option value="m_chinaswamy">M. Chinnaswamy Stadium, Bengaluru</option>
+        <option value="narendra_modi">Narendra Modi Stadium, Ahmedabad</option>
+        <option value="chepauk">M.A. Chidambaram Stadium, Chennai</option>
+        <option value="arun_jaitley">Arun Jaitley Stadium, Delhi</option>
+        <option value="rajiv_gandhi">Rajiv Gandhi Stadium, Hyderabad</option>
+        <option value="hpca_dharamshala">HPCA Stadium, Dharamshala</option>
+      </optgroup>
+      <optgroup label="Pakistan">
+        <option value="gaddafi">Gaddafi Stadium, Lahore</option>
+        <option value="national_stadium">National Stadium, Karachi</option>
+        <option value="rawalpindi">Rawalpindi Cricket Stadium</option>
+      </optgroup>
+      <optgroup label="South Africa">
+        <option value="wanderers">The Wanderers Stadium, Johannesburg</option>
+        <option value="superport">SuperSport Park, Centurion</option>
+        <option value="newlands">Newlands, Cape Town</option>
+      </optgroup>
+      <optgroup label="New Zealand">
+        <option value="eden_park">Eden Park, Auckland</option>
+        <option value="hagley_oval">Hagley Oval, Christchurch</option>
+        <option value="basin_reserve">Basin Reserve, Wellington</option>
+      </optgroup>
+      <optgroup label="West Indies">
+        <option value="kensington">Kensington Oval, Barbados</option>
+        <option value="queen_park_oval">Queen's Park Oval, Trinidad</option>
+      </optgroup>
+      <optgroup label="Sri Lanka">
+        <option value="r_premadasa">R. Premadasa Stadium, Colombo</option>
+        <option value="galle">Galle International Stadium, Galle</option>
+      </optgroup>
+      <optgroup label="Bangladesh & UAE">
+        <option value="shere_bangla">Sher-e-Bangla Stadium, Mirpur</option>
+        <option value="dubai_intl">Dubai International Stadium, UAE</option>
+        <option value="sharjah">Sharjah Cricket Stadium, UAE</option>
+      </optgroup>
+    </select>
+    <button id="dir-confirm-btn" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-4 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-emerald-950/50 flex items-center justify-center cursor-pointer whitespace-nowrap">
+      Confirm
+    </button>
   </div>
-</section>
+</div>
+  
+
 
 
     <footer class="footer"><div class="footer-inner"><span>Inside Cricket — an educational introduction to the game.</span><span>Built from supplied cricket-history and World Cup resources.</span></div></footer>
