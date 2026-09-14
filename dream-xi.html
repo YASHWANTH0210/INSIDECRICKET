@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream XI Builder | Inside Cricket</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-black text-white font-sans min-h-screen flex flex-col justify-between">
+
+  <!-- Header Navigation -->
+  <header class="site-header border-b border-zinc-800 bg-black/95 sticky top-0 z-50 backdrop-blur">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center" aria-label="Main navigation">
+      <a href="index.html" class="brand flex items-center space-x-2">
+        <span class="brand-mark text-emerald-400 font-black tracking-wider text-lg">INSIDE CRICKET</span>
+      </a>
+      <div class="nav-links flex items-center space-x-6 text-sm">
+        <a href="index.html" class="text-gray-400 hover:text-emerald-400 transition">About Cricket</a>
+        <a href="index.html#world-cup" class="text-gray-400 hover:text-emerald-400 transition">ODI World Cup Finals</a>
+        <a href="dream-xi.html" class="text-emerald-400 font-semibold transition">Dream XI Builder</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Dream XI Section -->
+  <main class="py-12 px-4 md:px-12 flex-1">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-10">
+        <span class="text-emerald-400 font-mono tracking-widest uppercase text-xs">Ultimate Squad Builder</span>
+        <h1 class="text-3xl md:text-4xl font-extrabold mt-2">Dream XI Tactical Arena</h1>
+        <p class="text-gray-400 mt-2 text-sm max-w-xl mx-auto">Select 11 legendary cricketers across all eras and build your ultimate formation.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Squad Selectors Column -->
+        <div class="lg:col-span-5 bg-zinc-900/80 p-6 rounded-2xl border border-emerald-500/20 backdrop-blur-md shadow-xl">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="font-bold text-lg text-emerald-400"><i class="fa-solid fa-sliders mr-2"></i> Squad Selectors</h2>
+            <span class="bg-emerald-500/20 text-emerald-300 text-xs px-2.5 py-1 rounded-full font-mono">11 Players</span>
+          </div>
+
+          <div class="space-y-4 max-h-[520px] overflow-y-auto pr-2">
+            <!-- Opener 1 -->
+            <div>
+              <label class="block text-xs text-gray-400 mb-1 font-mono uppercase">Opener 1</label>
+              <select class="squad-select w-full bg-black/80 border border-emerald-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                <option value="S. Tendulkar">Sachin Tendulkar (IND - 90s)</option>
+                <option value="Sir J. Hobbs">Jack Hobbs (ENG - 10s)</option>
+                <option value="G. Greenidge">Gordon Greenidge (WI - 80s)</option>
+                <option value="V. Sehwag">Virender Sehwag (IND - 00s)</option>
+                <option value="A. Cook">Alastair Cook (ENG - 10s)</option>
+              </select>
+            </div>
+            <!-- Opener 2 -->
+            <div>
+              <label class="block text-xs text-gray-400 mb-1 font-mono uppercase">Opener 2</label>
+              <select class="squad-select w-full bg-black/80 border border-emerald-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                <option value="A. Gilchrist">Adam Gilchrist (AUS - 00s)</option>
+                <option value="S. Gavaskar">Sunil Gavaskar (IND - 70s)</option>
+                <option value="M. Hayden">Matthew Hayden (AUS - 00s)</option>
+                <option value="R. Sharma">Rohit Sharma (IND - 10s)</option>
+                <option value="G. Smith">Graeme Smith (SA - 00s)</option>
+              </select>
+            </div>
+            <!-- No. 3 -->
+            <div>
+              <label class="block text-xs text-gray-400 mb-1 font-mono uppercase">No. 3</label>
+              <select class="squad-select w-full bg-black/80 border border-emerald-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                <option value="D. Bradman">Sir Don Bradman (AUS - 30s)</option>
+                <option value="V. Kohli">Virat Kohli (IND - 10s)</option>
+                <option value="K. Williamson">Kane Williamson (NZ - 10s)</option>
+                <option value="G. Pollock">Graeme Pollock (SA - 60s)</option>
+                <option value="K. Sangakkara">Kumar Sangakkara (SL - 00s)</option>
+              </select>
+            </div>
+            <!-- No. 4 -->
+            <div>
+              <label class="block text-xs text-gray-400 mb-1 font-mono uppercase">No. 4</label>
+              <select class="squad-select w-full bg-black/80 border border-emerald-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                <option value="V. Kohli">Virat Kohli (IND - 10s)</option>
+                <option value="B. Lara">Brian Lara (WI - 90s)</option>
+                <option value="J. Root">Joe Root (ENG - 10s)</option>
+                <option value="G. Chappell">Greg Chappell (AUS - 70s)</option>
+                <option value="J. Miandad">Javed Miandad (PAK - 80s)</option>
+              </select>
+            </div>
+            <!-- No. 5 -->
+            <div>
+              <label class="block text-xs text-gray-400 mb-1 font-mono uppercase">No. 5</label>
+              <select class="squad-select w-full bg-black/80 border border-emerald-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                <option value="S. Tendulkar">Sachin Tendulkar (IND - 90s)</option>
+                <option value="A. Border">Allan Border (AUS - 80s)</option>
+                <option value="S. Smith">Steve Smith (AUS - 10s)</option>
+                <option value="Inzamam-ul-Haq">Inzamam-ul-Haq (PAK - 90s)</option>
+                <option value="M. Clarke">Michael Clarke (AUS - 10s)</option>
+              </select>
+            </div>
+            <!-- WK / Finisher -->
+            <div>
+              <label class="block text-xs text-gray-400 mb-1 font-mono uppercase">WK / Finisher</label>
+              <select class="squad-select w-full bg-black/80 border border-emerald-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                <option value="M.S. Dhoni">M.S. Dhoni (IND - 10s)</option>
+                <option value="MS Dhoni">MS Dhoni (IND - 00s)</option>
+                <option value="B. Taylor">Brendon Taylor (ZIM - 10s)</option>
+                <option value="R. Dravid">Rahul Dravid (IND - 00s)</option>
+                <option value="J. Dujon">Jeff Dujon (WI - 80s)</option>
+              </select>
+            </div>
+            <!-- All Rounder -->
+            <div>
+              <label class="block text-xs text-gray-400 mb-1 font-mono uppercase">All Rounder</label>
+              <select class="squad-select w-full bg-black/80 border border-emerald-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                <option value="G. Sobers">Sir Garfield Sobers (WI - 60s)</option>
+                <option value="J. Kallis">Jacques Kallis (SA - 00s)</option>
+                <option value="I. Khan">Imran Khan (PAK - 80s)</option>
+                <option value="I. Botham">Ian Botham (ENG - 80s)</option>
+                <option value="K. Dev">Kapil Dev (IND - 83)</option>
+              </select>
+            </div>
+            <!-- Spinner 1 -->
+            <div>
+              <label class="block text-xs text-gray-400 mb-1 font-mono uppercase">Spinner 1</label>
+              <select class="squad-select w-full bg-black/80 border border-emerald-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                <option value="S. Warne">Shane Warne (AUS - 90s)</option>
+                <option value="A. Kumble">Anil Kumble (IND - 90s)</option>
+                <option value="R. Ashwin">R. Ashwin (IND - 10s)</option>
+                <option value="D. Vettori">Daniel Vettori (NZ - 00s)</option>
+                <option value="R. Herath">Rangana Herath (SL - 10s)</option>
+              </select>
+            </div>
+            <!-- Spinner 2 -->
+            <div>
+              <label class="block text-xs text-gray-400 mb-1 font-mono uppercase">Spinner 2</label>
+              <select class="squad-select w-full bg-black/80 border border-emerald-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                <option value="M. Murali">M. Muralitharan (SL - 00s)</option>
+                <option value="S. Ajmal">Saeed Ajmal (PAK - 10s)</option>
+                <option value="N. Lyon">Nathan Lyon (AUS - 10s)</option>
+                <option value="B. Bedi">Bishan Singh Bedi (IND - 70s)</option>
+                <option value="L. Gibbs">Lance Gibbs (WI - 60s)</option>
+              </select>
+            </div>
+            <!-- Pacer 1 -->
+            <div>
+              <label class="block text-xs text-gray-400 mb-1 font-mono uppercase">Pacer 1</label>
+              <select class="squad-select w-full bg-black/80 border border-emerald-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                <option value="W. Akram">Wasim Akram (PAK - 90s)</option>
+                <option value="G. McGrath">Glenn McGrath (AUS - 00s)</option>
+                <option value="J. Anderson">James Anderson (ENG - 10s)</option>
+                <option value="M. Holding">Michael Holding (WI - 80s)</option>
+                <option value="D. Lillee">Dennis Lillee (AUS - 70s)</option>
+              </select>
+            </div>
+            <!-- Pacer 2 -->
+            <div>
+              <label class="block text-xs text-gray-400 mb-1 font-mono uppercase">Pacer 2</label>
+              <select class="squad-select w-full bg-black/80 border border-emerald-500/30 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-400">
+                <option value="D. Steyn">Dale Steyn (SA - 10s)</option>
+                <option value="W. Younis">Waqar Younis (PAK - 90s)</option>
+                <option value="C. Ambrose">Curtly Ambrose (WI - 90s)</option>
+                <option value="P. Cummins">Pat Cummins (AUS - 20s)</option>
+                <option value="J. Bumrah">Jasprit Bumrah (IND - 20s)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-zinc-800 flex gap-4 text-center">
+            <div class="flex-1 bg-black/40 p-3 rounded-xl border border-zinc-800">
+              <span class="block text-[10px] text-gray-400 font-mono uppercase">Eras Covered</span>
+              <span class="text-emerald-400 font-bold text-sm">1920s - 2020s</span>
+            </div>
+            <div class="flex-1 bg-black/40 p-3 rounded-xl border border-zinc-800">
+              <span class="block text-[10px] text-gray-400 font-mono uppercase">Legend Pool</span>
+              <span class="text-emerald-400 font-bold text-sm">100+ Icons</span>
+            </div>
+          </div>
+
+          <button id="btn-copy-lineup" class="w-full mt-6 bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-3.5 px-4 rounded-xl transition duration-200 flex items-center justify-center space-x-2 shadow-lg shadow-emerald-500/20 cursor-pointer">
+            <i class="fa-solid fa-share-nodes"></i>
+            <span>Copy Dream XI Lineup</span>
+          </button>
+        </div>
+
+        <!-- Tactical Field View Column -->
+        <div class="lg:col-span-7 bg-gradient-to-b from-emerald-950/60 to-zinc-950/80 p-6 rounded-2xl border border-emerald-500/30 relative min-h-[600px] flex flex-col justify-between backdrop-blur-md shadow-xl">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="font-bold text-lg text-emerald-300">Field Formation</h2>
+            <span class="flex items-center text-xs text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/30 font-mono">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-2"></span> Tactical Ground View
+            </span>
+          </div>
+
+          <!-- Pitch Grid Layout -->
+          <div class="relative flex-1 bg-gradient-to-b from-emerald-900/40 via-emerald-950/60 to-black/60 rounded-xl border border-emerald-500/20 p-6 flex flex-col justify-between shadow-inner">
+            <div class="absolute inset-10 border border-emerald-500/10 rounded-full pointer-events-none"></div>
+            
+            <!-- Opening Batters -->
+            <div class="flex justify-around z-10">
+              <div class="bg-black/80 border border-emerald-500/40 px-4 py-2 rounded-lg text-center shadow-md">
+                <div class="field-player-name text-xs font-bold text-white">S. Tendulkar</div>
+                <span class="text-[9px] text-emerald-400 font-mono">Opener 1</span>
+              </div>
+              <div class="bg-black/80 border border-emerald-500/40 px-4 py-2 rounded-lg text-center shadow-md">
+                <div class="field-player-name text-xs font-bold text-white">A. Gilchrist</div>
+                <span class="text-[9px] text-emerald-400 font-mono">Opener 2</span>
+              </div>
+            </div>
+
+            <!-- Middle Order -->
+            <div class="flex justify-around z-10 my-4">
+              <div class="bg-black/80 border border-emerald-500/40 px-4 py-2 rounded-lg text-center shadow-md">
+                <div class="field-player-name text-xs font-bold text-white">D. Bradman</div>
+                <span class="text-[9px] text-emerald-400 font-mono">No. 3</span>
+              </div>
+              <div class="bg-black/80 border border-emerald-500/40 px-4 py-2 rounded-lg text-center shadow-md">
+                <div class="field-player-name text-xs font-bold text-white">V. Kohli</div>
+                <span class="text-[9px] text-emerald-400 font-mono">No. 4</span>
+              </div>
+              <div class="bg-black/80 border border-emerald-500/40 px-4 py-2 rounded-lg text-center shadow-md">
+                <div class="field-player-name text-xs font-bold text-white">S. Tendulkar</div>
+                <span class="text-[9px] text-emerald-400 font-mono">No. 5</span>
+              </div>
+            </div>
+
+            <!-- WK & All Rounder -->
+            <div class="flex justify-around z-10 my-4">
+              <div class="bg-black/80 border border-emerald-500/40 px-4 py-2 rounded-lg text-center shadow-md">
+                <div class="field-player-name text-xs font-bold text-white">M.S. Dhoni</div>
+                <span class="text-[9px] text-emerald-400 font-mono">WK / Finisher</span>
+              </div>
+              <div class="bg-black/80 border border-emerald-400 px-4 py-2 rounded-lg text-center shadow-md bg-emerald-950/90">
+                <div class="field-player-name text-xs font-bold text-emerald-300">G. Sobers</div>
+                <span class="text-[9px] text-emerald-400 font-mono">All-Rounder</span>
+              </div>
+            </div>
+
+            <!-- Bowling Unit -->
+            <div class="grid grid-cols-4 gap-2 z-10 mt-4">
+              <div class="bg-black/80 border border-emerald-500/40 p-2 rounded-lg text-center shadow-md">
+                <div class="field-player-name text-[11px] font-bold text-white truncate">S. Warne</div>
+                <span class="text-[8px] text-emerald-400 font-mono block">Spinner 1</span>
+              </div>
+              <div class="bg-black/80 border border-emerald-500/40 p-2 rounded-lg text-center shadow-md">
+                <div class="field-player-name text-[11px] font-bold text-white truncate">M. Murali</div>
+                <span class="text-[8px] text-emerald-400 font-mono block">Spinner 2</span>
+              </div>
+              <div class="bg-black/80 border border-emerald-500/40 p-2 rounded-lg text-center shadow-md">
+                <div class="field-player-name text-[11px] font-bold text-white truncate">W. Akram</div>
+                <span class="text-[8px] text-emerald-400 font-mono block">Pacer 1</span>
+              </div>
+              <div class="bg-black/80 border border-emerald-500/40 p-2 rounded-lg text-center shadow-md">
+                <div class="field-player-name text-[11px] font-bold text-white truncate">D. Steyn</div>
+                <span class="text-[8px] text-emerald-400 font-mono block">Pacer 2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-zinc-800 bg-black/90 py-6 text-center text-xs text-gray-500">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <span>Inside Cricket — An educational introduction to the game.</span>
+      <div class="flex space-x-4">
+        <a href="index.html" class="hover:text-emerald-400 transition">Home</a>
+        <a href="index.html" class="hover:text-emerald-400 transition">About Cricket</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Synchronization & Clipboard Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const selects = document.querySelectorAll('.squad-select');
+      const playerNames = document.querySelectorAll('.field-player-name');
+
+      selects.forEach((select, index) => {
+        select.addEventListener('change', (e) => {
+          if (playerNames[index]) {
+            playerNames[index].textContent = e.target.value;
+          }
+        });
+      });
+
+      const copyBtn = document.getElementById('btn-copy-lineup');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const lineup = Array.from(playerNames).map(el => el.textContent).join(', ');
+          navigator.clipboard.writeText(`My Dream XI Lineup: ${lineup}`).then(() => {
+            copyBtn.innerHTML = `<i class="fa-solid fa-check text-black"></i> <span>Copied to Clipboard!</span>`;
+            setTimeout(() => {
+              copyBtn.innerHTML = `<i class="fa-solid fa-share-nodes"></i> <span>Copy Dream XI Lineup</span>`;
+            }, 2500);
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
