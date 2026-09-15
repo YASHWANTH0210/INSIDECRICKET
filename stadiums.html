@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inside Cricket - Advanced Global Stadiums Directory</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans antialiased min-h-screen">
+
+    <!-- Stadiums Section Wrapper -->
+    <section class="py-12 px-4 max-w-7xl mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-emerald-400 tracking-wide uppercase">Global Cricket Stadiums Directory</h2>
+            <p class="text-gray-400 mt-2 text-sm md:text-base">Explore complete venue analytics, pitch behavior, dimensions, and player suitability.</p>
+        </div>
+
+        <!-- Search and Filter Bar -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 bg-gray-900 p-4 rounded-xl border border-emerald-500/30 shadow-lg">
+            <!-- Search Input -->
+            <div class="relative w-full md:w-96">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+                <input type="text" id="stadiumSearch" placeholder="Search stadiums or cities..." 
+                    class="w-full bg-gray-950 text-white pl-10 pr-4 py-2 rounded-lg border border-gray-800 focus:outline-none focus:border-emerald-500 text-sm transition-colors">
+            </div>
+
+            <!-- Country Filter Tabs -->
+            <div class="flex flex-wrap gap-2 justify-center" id="countryFilters">
+                <button onclick="filterStadiums('all', event)" class="filter-btn active bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">All</button>
+                <button onclick="filterStadiums('India', event)" class="filter-btn bg-gray-800 text-gray-300 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">India</button>
+                <button onclick="filterStadiums('Australia', event)" class="filter-btn bg-gray-800 text-gray-300 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">Australia</button>
+                <button onclick="filterStadiums('England', event)" class="filter-btn bg-gray-800 text-gray-300 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">England</button>
+                <button onclick="filterStadiums('Pakistan', event)" class="filter-btn bg-gray-800 text-gray-300 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">Pakistan</button>
+                <button onclick="filterStadiums('South Africa', event)" class="filter-btn bg-gray-800 text-gray-300 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">South Africa</button>
+                <button onclick="filterStadiums('New Zealand', event)" class="filter-btn bg-gray-800 text-gray-300 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">New Zealand</button>
+                <button onclick="filterStadiums('Sri Lanka', event)" class="filter-btn bg-gray-800 text-gray-300 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">Sri Lanka</button>
+                <button onclick="filterStadiums('Bangladesh', event)" class="filter-btn bg-gray-800 text-gray-300 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">Bangladesh</button>
+                <button onclick="filterStadiums('West Indies', event)" class="filter-btn bg-gray-800 text-gray-300 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">West Indies</button>
+                <button onclick="filterStadiums('Others', event)" class="filter-btn bg-gray-800 text-gray-300 hover:bg-gray-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors">Others</button>
+            </div>
+        </div>
+
+        <!-- Stadium Grid Container -->
+        <div id="stadiumGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Populated dynamically via JS -->
+        </div>
+    </section>
+
+    <!-- Venue Detail Modal -->
+    <div id="stadiumModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-gray-900 border border-emerald-500/40 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 bg-gray-800 hover:bg-red-600 text-white w-9 h-9 rounded-full flex items-center justify-center transition-colors z-10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modalContent">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        const stadiums = [
+            // India
+            {
+                name: "Narendra Modi Stadium", location: "Ahmedabad, India", country: "India", capacity: "132,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Red and black soil mix; offers good bounce initially with plenty of assistance for spinners as the match progresses.",
+                scores: { test: "340 (1st innings avg)", odi: "245", t20: "175" },
+                dimensions: "Very large boundaries (Square: ~75m, Straight: ~80m)",
+                highlights: "World's largest cricket stadium featuring LED stadium lights instead of traditional towers and 11 distinct pitch strips.",
+                suitability: "Wrist spinners, power hitters who can clear long boundaries, and technically sound opening batsmen."
+            },
+            {
+                name: "Eden Gardens", location: "Kolkata, India", country: "India", capacity: "68,000",
+                image: "https://images.unsplash.com/photo-1512716307740-44c12a2a8934?auto=format&fit=crop&w=800&q=80",
+                pitch: "Traditionally aids spinners under lights, though modern pitches offer good pace and carry for stroke-makers.",
+                scores: { test: "350 (1st innings avg)", odi: "250", t20: "165" },
+                dimensions: "Medium boundaries (Square: ~66m, Straight: ~77m)",
+                highlights: "India's oldest and most iconic cricket colosseum, renowned for its spine-chilling spectator roar.",
+                suitability: "Agile finger/wrist spinners and aggressive anchor batsmen who handle pressure well."
+            },
+            {
+                name: "Wankhede Stadium", location: "Mumbai, India", country: "India", capacity: "33,108",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Red soil surface offering true bounce, great carry, and significant dew factor under lights aiding chasing teams.",
+                scores: { test: "360 (1st innings avg)", odi: "275", t20: "180" },
+                dimensions: "Compact boundaries (Square: ~62m, Straight: ~70m)",
+                highlights: "Venue of India's historic 2011 World Cup triumph, famous for ocean breeze assisting early swing bowling.",
+                suitability: "Explosive opening power-hitters and skilled swing-bowling fast bowlers."
+            },
+            {
+                name: "M. Chinnaswamy Stadium", location: "Bengaluru, India", country: "India", capacity: "40,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Flat track with fast outfield leading to high-scoring thrillers; spinners come into play in later innings.",
+                scores: { test: "330 (1st innings avg)", odi: "280", t20: "190" },
+                dimensions: "Short boundaries (Square: ~58m, Straight: ~68m)",
+                highlights: "First eco-friendly solar-powered cricket stadium equipped with sub-air drainage technology.",
+                suitability: "Power-hitters, innovative 360-degree batters, and clever variations bowlers."
+            },
+            {
+                name: "M.A. Chidambaram Stadium (Chepauk)", location: "Chennai, India", country: "India", capacity: "38,200",
+                image: "https://images.unsplash.com/photo-1512716307740-44c12a2a8934?auto=format&fit=crop&w=800&q=80",
+                pitch: "Dry, abrasive red/black soil track that wears down quickly, offering massive turn and low bounce.",
+                scores: { test: "340 (1st innings avg)", odi: "235", t20: "160" },
+                dimensions: "Medium boundaries (Square: ~68m, Straight: ~75m)",
+                highlights: "India's second-oldest active Test venue, famous for sporting appreciation from knowledgeable local crowds.",
+                suitability: "Quality spin wizards, patient classical batsmen, and players who excel at playing sweep shots."
+            },
+            {
+                name: "Arun Jaitley Stadium", location: "New Delhi, India", country: "India", capacity: "35,200",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Slow, low-bouncing pitch that tends to grip for spinners and holds up during day-night white ball games.",
+                scores: { test: "340 (1st innings avg)", odi: "245", t20: "165" },
+                dimensions: "Short to medium boundaries (Square: ~60m, Straight: ~70m)",
+                highlights: "Historic ground formerly known as Feroz Shah Kotla, witnessing numerous record-breaking feats.",
+                suitability: "Clever slower-ball pace bowlers and batsmen adept at rotating strike against spin."
+            },
+            {
+                name: "Rajiv Gandhi International Stadium", location: "Hyderabad, India", country: "India", capacity: "39,200",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "True batting-friendly surface with consistent bounce; offers slight assistance to pacers initially and spinners later.",
+                scores: { test: "370 (1st innings avg)", odi: "265", t20: "175" },
+                dimensions: "Generous boundaries (Square: ~70m, Straight: ~78m)",
+                highlights: "Features massive outfield grass coverage and top-tier practice facilities for international sides.",
+                suitability: "Technical batsmen, anchor players, and accurate line-and-length fast bowlers."
+            },
+            {
+                name: "HPCA Stadium", location: "Dharamshala, India", country: "India", capacity: "23,000",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Seamer-friendly wicket with cold atmospheric conditions providing pronounced lateral movement and swing.",
+                scores: { test: "280 (1st innings avg)", odi: "230", t20: "160" },
+                dimensions: "Medium boundaries (Square: ~65m, Straight: ~74m)",
+                highlights: "Breathtaking elevation of 1,457 meters above sea level with snow-capped Himalayan peaks backdrop.",
+                suitability: "Out-and-out fast bowlers, swing specialists, and resilient top-order batsmen."
+            },
+            {
+                name: "Holkar Cricket Stadium", location: "Indore, India", country: "India", capacity: "30,000",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Pristine flat batting track with short dimensions, resulting in high-scoring run feasts.",
+                scores: { test: "390 (1st innings avg)", odi: "310", t20: "195" },
+                dimensions: "Very short boundaries (Square: ~56m, Straight: ~66m)",
+                highlights: "Celebrated for lightning-fast outfield and producing monumental individual batting records.",
+                suitability: "Aggressive openers, boundary hitters, and unorthodox stroke-makers."
+            },
+            {
+                name: "Ekana Cricket Stadium", location: "Lucknow, India", country: "India", capacity: "50,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Black soil pitches offer low bounce and favor spinners, while fresh red soil pitches assist fast bowlers.",
+                scores: { test: "320 (1st innings avg)", odi: "235", t20: "155" },
+                dimensions: "Large boundaries (Square: ~78m, Straight: ~82m)",
+                highlights: "Boasts one of the longest straight boundaries in international cricket alongside striking architecture.",
+                suitability: "Defensive spinners, grafters, and pace bowlers who bowl heavy lengths."
+            },
+            {
+                name: "JSCA International Stadium Complex", location: "Ranchi, India", country: "India", capacity: "50,000",
+                image: "https://images.unsplash.com/photo-1512716307740-44c12a2a8934?auto=format&fit=crop&w=800&q=80",
+                pitch: "Well-balanced surface with even pace, offering good carry for pacers and dependable bounce for batters.",
+                scores: { test: "340 (1st innings avg)", odi: "255", t20: "165" },
+                dimensions: "Generous boundaries (Square: ~72m, Straight: ~80m)",
+                highlights: "Equipped with dedicated indoor practice nets and excellent drainage facilities.",
+                suitability: "All-rounders, conventional stroke players, and disciplined seamers."
+            },
+            {
+                name: "PCA IS Bindra Stadium", location: "Mohali, India", country: "India", capacity: "28,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Traditionally provides good bounce and carry for fast bowlers, though flattens out nicely for batsmen.",
+                scores: { test: "330 (1st innings avg)", odi: "260", t20: "170" },
+                dimensions: "Medium boundaries (Square: ~64m, Straight: ~75m)",
+                highlights: "Famous for low floodlight towers and roaring crowd proximity to the playing field.",
+                suitability: "Pace bowlers exploiting early moisture and aggressive middle-order hitters."
+            },
+            {
+                name: "Sawai Mansingh Stadium", location: "Jaipur, India", country: "India", capacity: "30,000",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Hard batting-friendly surface with consistent bounce; dry pitches aid spinners in later stages.",
+                scores: { test: "320 (1st innings avg)", odi: "250", t20: "165" },
+                dimensions: "Circular symmetrical boundaries (~70m all around)",
+                highlights: "Home of Rajasthan Royals, featuring unique circular stands and expansive outfield.",
+                suitability: "Technically solid batsmen and clever variation spinners."
+            },
+            {
+                name: "Maharashtra Cricket Association Stadium", location: "Pune, India", country: "India", capacity: "42,700",
+                image: "https://images.unsplash.com/photo-1512716307740-44c12a2a8934?auto=format&fit=crop&w=800&q=80",
+                pitch: "Black soil pitch that tends to crumble, giving significant grip and turn to spinners.",
+                scores: { test: "300 (1st innings avg)", odi: "260", t20: "170" },
+                dimensions: "Medium-large boundaries (Square: ~68m, Straight: ~76m)",
+                highlights: "Modern facility offering unobstructed sightlines from every seat in the house.",
+                suitability: "Quality spin bowlers and patient middle-order run accumulators."
+            },
+            {
+                name: "DY Patil Stadium", location: "Navi Mumbai, India", country: "India", capacity: "45,300",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "True bounce and carry with quick outfield; assists pacers with the new ball under lights.",
+                scores: { test: "N/A", odi: "250", t20: "175" },
+                dimensions: "Generous boundaries (Square: ~70m, Straight: ~78m)",
+                highlights: "Architectural masterpiece featuring a cantilever roof structure unsupported by pillars.",
+                suitability: "Powerplay seamers and attacking top-order batsmen."
+            },
+
+            // Australia
+            {
+                name: "Melbourne Cricket Ground (MCG)", location: "Melbourne, Australia", country: "Australia", capacity: "100,024",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Drop-in pitch offering reliable pace, bounce, and lateral movement early on, flattening out for batting.",
+                scores: { test: "360 (1st innings avg)", odi: "255", t20: "160" },
+                dimensions: "Massive playing field (Square: ~82m, Straight: ~85m)",
+                highlights: "The legendary 'G' is the cathedral of Australian sports and southern hemisphere cricket.",
+                suitability: "Fast bowlers utilizing height and bounce, and athletic outfield runners."
+            },
+            {
+                name: "Perth Stadium (Optus Stadium)", location: "Perth, Australia", country: "Australia", capacity: "61,266",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Hard, fast bouncy pitch providing exceptional speed and carry for fast bowlers throughout.",
+                scores: { test: "340 (1st innings avg)", odi: "245", t20: "165" },
+                dimensions: "Large boundaries (Square: ~75m, Straight: ~82m)",
+                highlights: "State-of-the-art modern arena featuring striking lighting and unmatched spectator comfort.",
+                suitability: "Enforcer fast bowlers, bouncer specialists, and courageous back-foot batsmen."
+            },
+            {
+                name: "Adelaide Oval", location: "Adelaide, Australia", country: "Australia", capacity: "53,500",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Historically great for batting, but modern drop-in tracks offer significant turn for spinners on days 4 and 5.",
+                scores: { test: "390 (1st innings avg)", odi: "260", t20: "170" },
+                dimensions: "Asymmetrical (Very short square boundaries ~60m, long straight boundaries ~82m)",
+                highlights: "Seamlessly blends historic scoreboard charm with world-class modern grandstands.",
+                suitability: "Cut and pull shot specialists, wrist spinners, and classical Test openers."
+            },
+            {
+                name: "Sydney Cricket Ground (SCG)", location: "Sydney, Australia", country: "Australia", capacity: "48,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Dry surface that wears down significantly, making it the most spin-friendly pitch in Australia.",
+                scores: { test: "370 (1st innings avg)", odi: "265", t20: "175" },
+                dimensions: "Medium boundaries (Square: ~68m, Straight: ~78m)",
+                highlights: "Rich in colonial tradition, famous for members' pavilions and historic New Year's Tests.",
+                suitability: "Quality spin bowlers and patient accumulators of runs."
+            },
+            {
+                name: "The Gabba", location: "Brisbane, Australia", country: "Australia", capacity: "42,000",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Hard, bouncy green-tinged pitch offering lethal pace, steep carry, and movement for seamers.",
+                scores: { test: "350 (1st innings avg)", odi: "240", t20: "165" },
+                dimensions: "Generous boundaries (Square: ~73m, Straight: ~81m)",
+                highlights: "Considered a fortress for the Australian team, historically difficult for visiting nations.",
+                suitability: "Tall fast bowlers, slip fielders, and gritty middle-order batsmen."
+            },
+            {
+                name: "Bellerive Oval (Blundstone Arena)", location: "Hobart, Australia", country: "Australia", capacity: "19,500",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Windy coastal conditions provide pronounced swing and seam movement for pacers.",
+                scores: { test: "320 (1st innings avg)", odi: "240", t20: "160" },
+                dimensions: "Compact boundaries (Square: ~64m, Straight: ~72m)",
+                highlights: "Picturesque waterfront ground overlooking the Derwent River and Mount Wellington.",
+                suitability: "New-ball swing bowlers and counter-attacking batters."
+            },
+
+            // England & Wales
+            {
+                name: "Lord's Cricket Ground", location: "London, England", country: "England", capacity: "31,100",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Slope on the ground creates unique bowling angles; provides early moisture swing and good carry.",
+                scores: { test: "330 (1st innings avg)", odi: "250", t20: "165" },
+                dimensions: "Generous boundaries (Square: ~72m, Straight: ~80m)",
+                highlights: "Universally acclaimed as the 'Home of Cricket', featuring the historic Victorian pavilion.",
+                suitability: "Skilled line-and-length seam bowlers and classical test match batters."
+            },
+            {
+                name: "The Oval (Kia Oval)", location: "London, England", country: "England", capacity: "27,500",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Hard pitch with true bounce; wears well over five days, bringing spinners into play late in Test matches.",
+                scores: { test: "340 (1st innings avg)", odi: "260", t20: "170" },
+                dimensions: "Medium boundaries (Square: ~66m, Straight: ~75m)",
+                highlights: "The historic ground that traditionally hosts the final Test match of the English home summer.",
+                suitability: "Stroke-making batsmen, experienced spinners, and lively pacers."
+            },
+            {
+                name: "Edgbaston Cricket Ground", location: "Birmingham, England", country: "England", capacity: "25,000",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Well-rolled pitches offering good carry and pace, though overhead conditions frequently assist swing.",
+                scores: { test: "335 (1st innings avg)", odi: "255", t20: "175" },
+                dimensions: "Medium boundaries (Square: ~67m, Straight: ~76m)",
+                highlights: "Famed for its unmatched hostile, passionate crowd atmosphere during high-stakes matches.",
+                suitability: "Swing bowlers and aggressive white-ball run-chasers."
+            },
+            {
+                name: "Old Trafford Cricket Ground", location: "Manchester, England", country: "England", capacity: "26,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Historically damp pitches offering considerable seam movement, becoming drier and helpful for spinners.",
+                scores: { test: "325 (1st innings avg)", odi: "245", t20: "165" },
+                dimensions: "Generous boundaries (Square: ~70m, Straight: ~79m)",
+                highlights: "Historic northern venue renowned for dramatic Ashes encounters and electric crowds.",
+                suitability: "Seam bowlers with upright seams and resilient defensive openers."
+            },
+            {
+                name: "Headingley Cricket Ground", location: "Leeds, England", country: "England", capacity: "18,350",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Pronounced green cover early on creates a paradise for seam bowling and tricky batting conditions.",
+                scores: { test: "310 (1st innings avg)", odi: "250", t20: "170" },
+                dimensions: "Compact boundaries (Square: ~62m, Straight: ~72m)",
+                highlights: "Legendary Yorkshire ground famous for unbelievable heroic Test match finishes.",
+                suitability: "New-ball fast bowlers and gritty character batsmen."
+            },
+            {
+                name: "Trent Bridge", location: "Nottingham, England", country: "England", capacity: "17,500",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Renowned for consistent swing and seam movement due to atmospheric conditions and soil composition.",
+                scores: { test: "340 (1st innings avg)", odi: "275", t20: "180" },
+                dimensions: "Medium boundaries (Square: ~65m, Straight: ~74m)",
+                highlights: "A bowler's paradise providing classic swing and seam movement conditions.",
+                suitability: "Swing bowling artists and fluent stroke-makers."
+            },
+
+            // Pakistan
+            {
+                name: "Gaddafi Stadium", location: "Lahore, Pakistan", country: "Pakistan", capacity: "34,000",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Flat batting tracks with true bounce; assists slower bowlers and reverse swing as matches age.",
+                scores: { test: "370 (1st innings avg)", odi: "270", t20: "175" },
+                dimensions: "Generous boundaries (Square: ~70m, Straight: ~78m)",
+                highlights: "One of Pakistan's premier historic venues with a rich heritage of cricket encounters.",
+                suitability: "Hard-hitting batsmen, wrist spinners, and reverse-swing pacers."
+            },
+            {
+                name: "National Stadium", location: "Karachi, Pakistan", country: "Pakistan", capacity: "30,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Dry surface favoring spinners and batsmen who play well against turn; low bounce is common.",
+                scores: { test: "350 (1st innings avg)", odi: "250", t20: "165" },
+                dimensions: "Medium-large boundaries (Square: ~68m, Straight: ~77m)",
+                highlights: "The colossal cricketing hub of Sindh, known for deeply passionate crowds.",
+                suitability: "Quality spin bowlers and sweep-shot specialists."
+            },
+            {
+                name: "Rawalpindi Cricket Stadium", location: "Rawalpindi, Pakistan", country: "Pakistan", capacity: "15,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Generally flat highways favoring mammoth scores in limited-overs formats.",
+                scores: { test: "380 (1st innings avg)", odi: "285", t20: "185" },
+                dimensions: "Compact boundaries (Square: ~63m, Straight: ~72m)",
+                highlights: "Twin-city venue hosting high-intensity international series and T20 leagues.",
+                suitability: "Aggressive power-hitters and death-overs specialist bowlers."
+            },
+
+            // South Africa
+            {
+                name: "Wanderers Stadium", location: "Johannesburg, South Africa", country: "South Africa", capacity: "34,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "High altitude (1,750m) combined with hard pitch gives extreme bounce and carry for fast bowlers.",
+                scores: { test: "330 (1st innings avg)", odi: "260", t20: "175" },
+                dimensions: "Medium boundaries (Square: ~66m, Straight: ~75m)",
+                highlights: "Affectionately known as 'The Bullring', famous for high-scoring games and roaring crowds.",
+                suitability: "Tall fast bowlers, pull-shot experts, and athletic fielders."
+            },
+            {
+                name: "Newlands Cricket Ground", location: "Cape Town, South Africa", country: "South Africa", capacity: "25,000",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Offers good seam movement and bounce early, wearing down to assist spinners on days 4 and 5.",
+                scores: { test: "340 (1st innings avg)", odi: "240", t20: "160" },
+                dimensions: "Medium boundaries (Square: ~65m, Straight: ~74m)",
+                highlights: "Widely regarded as one of the most picturesque grounds globally with Table Mountain views.",
+                suitability: "Balanced squad players, swing bowlers, and technical bats."
+            },
+            {
+                name: "SuperSport Park", location: "Centurion, South Africa", country: "South Africa", capacity: "22,000",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Fast, bouncy pitch offering great carry for pacers throughout the match duration.",
+                scores: { test: "340 (1st innings avg)", odi: "265", t20: "175" },
+                dimensions: "Generous boundaries (Square: ~70m, Straight: ~78m)",
+                highlights: "Modern supersite hosting thrilling fast-bowling contests under brilliant sunshine.",
+                suitability: "Enforcer pacers and aggressive stroke-makers."
+            },
+
+            // New Zealand
+            {
+                name: "Eden Park", location: "Auckland, New Zealand", country: "New Zealand", capacity: "42,000",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Balanced pitch with true bounce; short boundaries make run-scoring rapid.",
+                scores: { test: "310 (1st innings avg)", odi: "250", t20: "175" },
+                dimensions: "Very short rugby-style boundaries (Square: ~55m, Straight: ~65m)",
+                highlights: "Historic multi-code stadium featuring unique short straight and square boundaries.",
+                suitability: "Innovative hitters, slog-sweepers, and change-up pace bowlers."
+            },
+            {
+                name: "Basin Reserve", location: "Wellington, New Zealand", country: "New Zealand", capacity: "11,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Green-tinged surface offering prominent seam movement and wind assistance for fast bowlers.",
+                scores: { test: "310 (1st innings avg)", odi: "235", t20: "155" },
+                dimensions: "Generous boundaries (Square: ~72m, Straight: ~80m)",
+                highlights: "Affectionately called 'The Basin', a world-famous wind-swept Test ground.",
+                suitability: "Disciplined seam bowlers and patient defensive openers."
+            },
+            {
+                name: "Hagley Oval", location: "Christchurch, New Zealand", country: "New Zealand", capacity: "18,000",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Hard pitch providing good carry, with lush outfields ensuring fast boundary scoring.",
+                scores: { test: "330 (1st innings avg)", odi: "255", t20: "165" },
+                dimensions: "Medium boundaries (Square: ~68m, Straight: ~76m)",
+                highlights: "Stunning parkland setting surrounded by towering trees in Christchurch.",
+                suitability: "Well-rounded batsmen and new-ball seamers."
+            },
+
+            // Sri Lanka
+            {
+                name: "R. Premadasa Stadium", location: "Colombo, Sri Lanka", country: "Sri Lanka", capacity: "35,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Slow, low-scoring track that grips heavily for spinners as the match progresses.",
+                scores: { test: "300 (1st innings avg)", odi: "235", t20: "150" },
+                dimensions: "Medium boundaries (Square: ~67m, Straight: ~75m)",
+                highlights: "Sri Lanka's premier white-ball colosseum with massive passionate crowds.",
+                suitability: "Guileful wrist and finger spinners, and patient run accumulators."
+            },
+            {
+                name: "Galle International Stadium", location: "Galle, Sri Lanka", country: "Sri Lanka", capacity: "35,000",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Cracking spin-friendly surface that offers sharp turn and variable bounce from day two onwards.",
+                scores: { test: "320 (1st innings avg)", odi: "240", t20: "160" },
+                dimensions: "Medium boundaries (Square: ~65m, Straight: ~74m)",
+                highlights: "World-famous venue flanked by the historic Dutch Fort and Indian Ocean.",
+                suitability: "World-class spin bowlers and batsmen who excel against turn."
+            },
+
+            // Bangladesh
+            {
+                name: "Sher-e-Bangla National Cricket Stadium", location: "Dhaka, Bangladesh", country: "Bangladesh", capacity: "25,416",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Slow, low-turning tracks where stroke-making is difficult and spinners dominate completely.",
+                scores: { test: "280 (1st innings avg)", odi: "225", t20: "145" },
+                dimensions: "Compact boundaries (Square: ~60m, Straight: ~70m)",
+                highlights: "The cauldron of Bangladeshi cricket, known for spinning tracks and fierce fans.",
+                suitability: "Left-arm orthodox spinners and gritty lower-order fighters."
+            },
+
+            // West Indies
+            {
+                name: "Kensington Oval", location: "Bridgetown, Barbados", country: "West Indies", capacity: "28,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Bouncy, sporting wicket that gives assistance to fast bowlers initially and turns later.",
+                scores: { test: "320 (1st innings avg)", odi: "235", t20: "160" },
+                dimensions: "Medium boundaries (Square: ~68m, Straight: ~76m)",
+                highlights: "The 'Mecca of West Indian Cricket', steeped in legendary fast-bowling history.",
+                suitability: "Steep-bounce pacers and technically accomplished batters."
+            },
+            {
+                name: "Queen's Park Oval", location: "Port of Spain, Trinidad", country: "West Indies", capacity: "25,000",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Traditionally good for batting early on, assisting slower bowlers as the pitch wears down.",
+                scores: { test: "330 (1st innings avg)", odi: "240", t20: "160" },
+                dimensions: "Generous boundaries (Square: ~70m, Straight: ~78m)",
+                highlights: "Historic Caribbean venue holding decades of legendary international battles.",
+                suitability: "Accumulators and clever tactical spinners."
+            },
+
+            // Others / UAE / USA
+            {
+                name: "Dubai International Cricket Stadium", location: "Dubai, UAE", country: "Others", capacity: "25,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Dry surface favoring chasing teams due to heavy dew under lights; offers slow turn.",
+                scores: { test: "340 (1st innings avg)", odi: "245", t20: "160" },
+                dimensions: "Generous boundaries (Square: ~72m, Straight: ~80m)",
+                highlights: "Famous for its iconic 'Ring of Fire' floodlighting system and global neutral venue matches.",
+                suitability: "Powerplay wicket-takers and adaptable second-innings chasers."
+            },
+            {
+                name: "Sharjah Cricket Stadium", location: "Sharjah, UAE", country: "Others", capacity: "16,000",
+                image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80",
+                pitch: "Flat tracks that slow down significantly, providing substantial assistance to spinners.",
+                scores: { test: "310 (1st innings avg)", odi: "225", t20: "155" },
+                dimensions: "Compact boundaries (Square: ~60m, Straight: ~68m)",
+                highlights: "Holds the Guinness World Record for hosting the most One Day Internationals in history.",
+                suitability: "Clever spin bowlers and aggressive boundary hitters."
+            },
+            {
+                name: "Grand Prairie Stadium", location: "Dallas, Texas, USA", country: "Others", capacity: "15,000",
+                image: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80",
+                pitch: "Drop-in pitches offering true bounce and fast outfields conducive to high-scoring T20 games.",
+                scores: { test: "N/A", odi: "260", t20: "175" },
+                dimensions: "Medium boundaries (Square: ~65m, Straight: ~74m)",
+                highlights: "State-of-the-art American venue spearheading major league cricket growth in North America.",
+                suitability: "T20 specialists, power hitters, and mystery spinners."
+            }
+        ];
+
+        let currentFilter = 'all';
+
+        function renderStadiums(filter = 'all', searchQuery = '') {
+            const grid = document.getElementById('stadiumGrid');
+            grid.innerHTML = '';
+
+            const filtered = stadiums.filter(s => {
+                const matchesCategory = filter === 'all' || s.country === filter;
+                const matchesSearch = s.name.toLowerCase().includes(searchQuery.toLowerCase()) || s.location.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500">No stadiums found matching your search.</div>`;
+                return;
+            }
+
+            filtered.forEach((stadium, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-gray-900 border border-emerald-500/30 rounded-xl overflow-hidden shadow-lg hover:border-emerald-500 transition-all duration-300 group flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="h-48 bg-gray-800 relative overflow-hidden">
+                            <img src="${stadium.image}" alt="${stadium.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-emerald-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow">${stadium.location}</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-white mb-1">${stadium.name}</h3>
+                            <p class="text-emerald-400 text-sm font-medium mb-3">Capacity: ${stadium.capacity}</p>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-2">${stadium.highlights}</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-0">
+                        <button onclick="openStadiumModal('${stadium.name.replace(/'/g, "\\'")}')" class="w-full bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/40 text-xs font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+                            <span>Explore Venue Analytics</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openStadiumModal(name) {
+            const stadium = stadiums.find(s => s.name === name);
+            if (!stadium) return;
+
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="relative h-64 sm:h-72 w-full">
+                    <img src="${stadium.image}" alt="${stadium.name}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-black/40"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <span class="bg-emerald-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">${stadium.location}</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">${stadium.name}</h2>
+                        <p class="text-emerald-400 text-sm font-medium">Capacity: ${stadium.capacity}</p>
+                    </div>
+                </div>
+                <div class="p-6 space-y-6">
+                    <!-- Highlights -->
+                    <div>
+                        <h4 class="text-xs uppercase tracking-wider text-emerald-400 font-bold mb-1"><i class="fa-solid fa-star mr-1"></i> Ground Highlight</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed">${stadium.highlights}</p>
+                    </div>
+
+                    <!-- Pitch Condition -->
+                    <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                        <h4 class="text-xs uppercase tracking-wider text-emerald-400 font-bold mb-1"><i class="fa-solid fa-seedling mr-1"></i> Pitch Condition & Behavior</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed">${stadium.pitch}</p>
+                    </div>
+
+                    <!-- Avg Scores -->
+                    <div>
+                        <h4 class="text-xs uppercase tracking-wider text-emerald-400 font-bold mb-3"><i class="fa-solid fa-chart-bar mr-1"></i> Average Scores by Format</h4>
+                        <div class="grid grid-cols-3 gap-3 text-center">
+                            <div class="bg-gray-800/60 p-3 rounded-lg border border-gray-700/50">
+                                <span class="block text-gray-400 text-xs">Test (1st Inn)</span>
+                                <span class="text-white font-bold text-sm sm:text-base">${stadium.scores.test}</span>
+                            </div>
+                            <div class="bg-gray-800/60 p-3 rounded-lg border border-gray-700/50">
+                                <span class="block text-gray-400 text-xs">ODI Average</span>
+                                <span class="text-white font-bold text-sm sm:text-base">${stadium.scores.odi}</span>
+                            </div>
+                            <div class="bg-gray-800/60 p-3 rounded-lg border border-gray-700/50">
+                                <span class="block text-gray-400 text-xs">T20 Average</span>
+                                <span class="text-white font-bold text-sm sm:text-base">${stadium.scores.t20}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dimensions & Suitability Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                            <h4 class="text-xs uppercase tracking-wider text-emerald-400 font-bold mb-1"><i class="fa-solid fa-ruler-combined mr-1"></i> Dimensions</h4>
+                            <p class="text-gray-300 text-xs leading-relaxed">${stadium.dimensions}</p>
+                        </div>
+                        <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+                            <h4 class="text-xs uppercase tracking-wider text-emerald-400 font-bold mb-1"><i class="fa-solid fa-user-check mr-1"></i> Player Suitability</h4>
+                            <p class="text-gray-300 text-xs leading-relaxed">${stadium.suitability}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('stadiumModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('stadiumModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function filterStadiums(country, event) {
+            currentFilter = country;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-emerald-600', 'text-white');
+                btn.classList.add('bg-gray-800', 'text-gray-300');
+            });
+            if (event && event.target) {
+                event.target.classList.remove('bg-gray-800', 'text-gray-300');
+                event.target.classList.add('bg-emerald-600', 'text-white');
+            }
+
+            const searchQuery = document.getElementById('stadiumSearch').value;
+            renderStadiums(country, searchQuery);
+        }
+
+        document.getElementById('stadiumSearch').addEventListener('input', (e) => {
+            renderStadiums(currentFilter, e.target.value);
+        });
+
+        // Close modal on background click
+        document.getElementById('stadiumModal').addEventListener('click', (e) => {
+            if (e.target.id === 'stadiumModal') closeModal();
+        });
+
+        // Initial Render
+        renderStadiums();
+    </script>
+</body>
+</html>
